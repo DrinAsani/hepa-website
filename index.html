@@ -81,12 +81,15 @@
     background: linear-gradient(270deg, var(--wine-red), #a14d54, var(--wine-red));
     background-size: 600% 600%;
     animation: heroGradient 20s ease infinite;
-  }
-  /* Subtle pattern overlay for all sections */
-  section {
     position: relative;
+    overflow: hidden;
   }
-  section::before {
+  /* Remove pattern overlay on Hero */
+  #hero::before {
+    display: none;
+  }
+  /* Subtle pattern overlay for all other sections */
+  section:not(#hero)::before {
     content: "";
     position: absolute;
     top: 0;
@@ -105,6 +108,14 @@
   }
   /* Ensure content sits above pattern */
   section > * {
+    position: relative;
+    z-index: 1;
+  }
+  /* Increase header logo size */
+  .site-logo {
+    height: 80px;
+  }
+</style> {
     position: relative;
     z-index: 1;
   }
