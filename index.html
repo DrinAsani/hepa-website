@@ -100,8 +100,8 @@
       45deg,
       transparent,
       transparent 10px,
-      rgba(114, 47, 55, 0.05) 10px,
-      rgba(114, 47, 55, 0.05) 20px
+      rgba(114, 47, 55, 0.025) 10px,
+      rgba(114, 47, 55, 0.025) 20px
     );
     pointer-events: none;
     z-index: 0;
@@ -190,7 +190,20 @@
       <button class="arrow left" data-target="services">&#8592;</button>
       <button class="arrow right" data-target="contact">&#8594;</button>
     </section>
-    <section id="contact" style="background: var(--light-gray); padding: 4rem 2rem;">
+    <section id="awards" style="background: var(--white); color: var(--black); padding: 4rem 2rem;">
+  <div style="max-width:800px; margin:auto; text-align:center; position:relative;">
+    <h2 style="font-size:2.5rem; color:var(--wine-red); margin-bottom:1.5rem;">Awards, Certifications & Partnerships</h2>
+    <div class="badge-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:2rem; align-items:center; justify-items:center;">
+      <!-- Placeholder badges, replace src with real badge URLs -->
+      <img src="badge-cert-1.png" alt="Certification 1" style="max-width:80px;">
+      <img src="badge-cert-2.png" alt="Certification 2" style="max-width:80px;">
+      <img src="badge-cert-3.png" alt="Award 1" style="max-width:80px;">
+      <img src="badge-partner-1.png" alt="Partner Company" style="max-width:80px;">
+    </div>
+  </div>
+</section>
+
+<section id="contact" style="background: var(--light-gray); padding: 4rem 2rem;">
   <div class="contact-wrapper" style="max-width: 800px; margin: auto; display: flex; flex-direction: column; gap: 2rem;">
     <h2 style="font-size: 2.5rem; text-align: center; color: var(--wine-red);">Contact Us</h2>
     <p style="text-align: center; font-size: 1rem; color: var(--black); max-width: 600px; margin: auto;">Have questions or ready to start a project? Fill out the form below and our team will reach out within one business day.</p>
