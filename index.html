@@ -71,12 +71,49 @@
     /* Footer */
     .social-footer { text-align:center; padding:2rem 0; }
     .social-footer a { margin:0 0.5rem; color:var(--wine-red); text-decoration:none; }
-  </style>
+    /* Animated hero gradient */
+  @keyframes heroGradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  #hero {
+    background: linear-gradient(270deg, var(--wine-red), #a14d54, var(--wine-red));
+    background-size: 600% 600%;
+    animation: heroGradient 20s ease infinite;
+  }
+  /* Subtle pattern overlay for all sections */
+  section {
+    position: relative;
+  }
+  section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(114, 47, 55, 0.05) 10px,
+      rgba(114, 47, 55, 0.05) 20px
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  /* Ensure content sits above pattern */
+  section > * {
+    position: relative;
+    z-index: 1;
+  }
+</style>
 </head>
 <body>
   <div id="progress-bar"></div>
   <header>
-    <a id="home-logo"><img src="hepa_logo_transparent.png" alt="Hepa logo" class="site-logo"></a>
+    <a id="home-logo"><img src="hepa-logo.png" alt="Hepa logo" class="site-logo"></a>
     <nav>
       <a data-target="hero">Home</a>
       <a data-target="about">About</a>
@@ -87,8 +124,9 @@
   </header>
   <main id="main-slider">
     <section id="hero">
-      <h1>Welcome to Hepa</h1>
-      <p>Solutions for automated services, web designing, and network solutions.</p>
+      <!-- Company Logo in Hero -->
+      <img src="hepa_logo_transparent.png" alt="Hepa logo" style="width:120px; margin-bottom:1.5rem;" />
+      <h1>Solutions for automated services, web designing, and network solutions.</p>
       <button class="arrow right" data-target="about">&#8594;</button>
     </section>
     <section id="about" style="background: var(--white); color: var(--black); display: flex; align-items: center; justify-content: center; padding: 4rem 2rem; position: relative;">
@@ -111,7 +149,18 @@
     </div>
   </div>
 </section>
-    <section id="services">
+    <section id="tech-kosova" style="background: var(--white); color: var(--black); padding: 4rem 2rem; position: relative;">
+  <button class="arrow left" data-target="about" aria-label="Previous section: About">&#8592;</button>
+  <button class="arrow right" data-target="services" aria-label="Next section: Services">&#8594;</button>
+  <div style="max-width:800px; margin:auto; text-align:center; position:relative; z-index:1;">
+    <h2 style="font-size:2.5rem; color:var(--wine-red); margin-bottom:1rem;">Tech Companies in Kosova</h2>
+    <p style="font-size:1rem; line-height:1.6;">
+      Kosova's technology sector has rapidly gained recognition for delivering outstanding outsourced services. Local firms combine deep technical expertise, agile methodologies, and competitive pricing to serve clients worldwide. With strong education backgrounds, multilingual teams, and a vibrant startup culture, Kosova-based tech companies excel in software development, system integration, and digital innovation, making them trusted partners for global businesses seeking reliable and high-quality solutions.
+    </p>
+  </div>
+</section>
+
+<section id="services"
       <h2>Our Services</h2>
       <div class="service-list">
         <div class="service-item" data-target="service-details">Web Design</div>
