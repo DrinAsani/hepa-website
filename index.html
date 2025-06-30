@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hepa - Smart Energy Solutions</title>
+  <title>Hepa Solutions – IT, Network & Automation</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -12,599 +12,334 @@
       --black: #000000;
       --light-gray: #f5f5f5;
       --card-shadow: rgba(0,0,0,0.1);
+      --accent: #e0e6f7;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
     html, body { height:100%; overflow-x:hidden; scroll-behavior:smooth; }
-    body { font-family:'Poppins', sans-serif; color:var(--black); }
-    #progress-bar { position:fixed; top:0; left:0; height:4px; width:0; background:var(--wine-red); z-index:1000; }
+    body { font-family:'Poppins', sans-serif; color:var(--black); background:var(--light-gray);}
     header { position:fixed; top:0; left:0; right:0; background:var(--white); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 4px var(--card-shadow); z-index:999; }
-    .site-logo { height:40px; cursor:pointer; }
+    .site-logo { height:60px; cursor:pointer; }
     nav a { margin-left:1rem; color:var(--wine-red); text-decoration:none; font-weight:500; cursor:pointer; outline:none; }
     nav a:focus { outline:2px solid var(--wine-red); }
-    main { margin-top:72px; }
-    /* Slider */
-    #main-slider { display:flex; overflow-x:auto; overflow-y:hidden; scroll-snap-type:x mandatory; width:100%; height:100vh; }
-    #main-slider section { flex:0 0 100vw; scroll-snap-align:start; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:2rem; height:calc(100vh - 72px); }
-    .arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.8); border:none; border-radius:4px; padding:0.5rem; font-size:1.5rem; cursor:pointer; box-shadow:0 2px 4px var(--card-shadow); }
-    .arrow.left { left:1rem; }
-    .arrow.right { right:1rem; }
-    /* Section Colors */
-    #hero { background:var(--wine-red); color:var(--white); text-align:center; }
-    #about { background: var(--light-gray) url('hepa-aboutus-background.png') center/cover no-repeat; color: var(--black); }
-    /* Box around the About text for better contrast */
-  
-  /* Card around the Tech Companies text for better contrast */
-#tech-kosova .tech-text {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 600px;
-  margin: auto;
-  text-align: center;
-}
-
-
-    #services {
-  background: url('hepa-ourservices-background.png') center/cover no-repeat;
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  position: relative;
-}
-    #portfolio {
-  background: url('hepa-ourprojects-background.png') center/cover no-repeat;
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  position: relative;
-}
-    #awards {
-      background: url('hepa-awards-background.png') center/cover no-repeat;
-      color: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 4rem 2rem;
-      position: relative;
+    main { margin-top:80px; }
+    section { padding:4rem 2rem; position:relative; }
+    h1,h2,h3 { font-weight:700; }
+    h2 { color:var(--wine-red);}
+    .arrow { display:none; }
+    .container { max-width:1100px; margin:auto; }
+    #hero {
+      background: linear-gradient(270deg, var(--wine-red), #a14d54, var(--wine-red));
+      background-size: 600% 600%;
+      animation: heroGradient 20s ease infinite;
+      text-align:center;
+      color:var(--white);
+      padding: 6rem 2rem 4rem 2rem;
+      position:relative;
     }
-
-#contact {
-  background: url('hepa-contactus-background.png') center/cover no-repeat;
-  color: var(--black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 4rem 2rem;
-  position: relative;
-}
-    /* Hero */
-    #hero h1 { font-size:3rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:1rem; }
-    #hero p { font-size:1.25rem; max-width:700px; }
-    /* Redesigned About */
-    #about .about-container { max-width:1000px; margin:auto; display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:center; }
-    #about h2 { font-size:2.5rem; font-weight:700; color:var(--wine-red); margin-bottom:1rem; }
-    #about p { font-size:1rem; line-height:1.6; margin-bottom:1rem; }
-    #about ul { list-style:none; }
-    #about ul li { display:flex; align-items:start; gap:0.75rem; margin-bottom:0.75rem; }
-    #about ul li span.icon { font-size:1.5rem; color:var(--wine-red); }
-    #about .btn { background:var(--wine-red); color:var(--white); padding:0.75rem 1.5rem; border:none; border-radius:4px; font-weight:600; cursor:pointer; }
-    #about .about-image { width:100%; height:300px; background:var(--light-gray); border-radius:8px; display:flex; justify-content:center; align-items:center; }
-    #about .about-image img { max-width:100%; max-height:100%; object-fit:contain; }
-    /* Services */
-    #services h2 { font-size:2rem; margin-bottom:1rem; }
-    #services .service-list { display:flex; gap:1rem; }
-    .service-item { background:var(--white); color:var(--black); padding:1rem; border-radius:8px; cursor:pointer; transition:transform .2s; }
-    .service-item:hover { transform:scale(1.05); }
-    
-
-
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 700px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-    /* Portfolio */
-    .projects { display:flex; gap:1rem; }
-    .project-item { background:var(--wine-red); color:var(--white); padding:1rem; border-radius:8px; cursor:pointer; transition:transform .2s; }
-    .project-item:hover { transform:scale(1.05); }
-    /* Contact */
-    #contact h2 { font-size:2rem; margin-bottom:1rem; }
-    #contact .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; width:80%; margin:auto; }
-    .contact-info { display:flex; flex-direction:column; gap:0.75rem; }
-    .contact-form { display:flex; flex-direction:column; gap:0.75rem; }
-    .contact-form input, .contact-form textarea { padding:0.75rem; border:1px solid #ccc; border-radius:4px; }
-    .contact-form label { display:flex; align-items:center; gap:0.5rem; }
-    .contact-form button { background:var(--wine-red); color:var(--white); padding:0.75rem; border:none; border-radius:4px; cursor:pointer; }
-    /* Partners */
-    #partners { display:none; padding:4rem 2rem; background:var(--light-gray); }
-    #partners.active { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
-    .partner-card { background:var(--white); border-left:4px solid var(--wine-red); padding:1rem; border-radius:4px; }
-    /* Footer */
-    .social-footer { text-align:center; padding:2rem 0; }
-    .social-footer a { margin:0 0.5rem; color:var(--wine-red); text-decoration:none; }
-    /* Animated hero gradient */
-  @keyframes heroGradient {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-  #hero {
-    background: linear-gradient(270deg, var(--wine-red), #a14d54, var(--wine-red));
-    background-size: 600% 600%;
-    animation: heroGradient 20s ease infinite;
-    position: relative;
-    overflow: hidden;
-  }
-  /* Remove pattern overlay on Hero */
-  #hero::before {
-    display: none;
-  }
-  /* Subtle pattern overlay for all other sections */
-  section:not(#hero)::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(114, 47, 55, 0.025) 10px,
-      rgba(114, 47, 55, 0.025) 20px
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
-  /* Ensure content sits above pattern */
-  section > * {
-    position: relative;
-    z-index: 1;
-  }
-  /* Increase header logo size */
-  .site-logo {
-    height: 80px;
-  }
-
-/* Portfolio Card and Animation */
-.portfolio-card {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.portfolio-card .projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-.portfolio-card .project-item {
-  background: var(--wine-red);
-  color: var(--white);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.portfolio-card .project-item:hover {
-  transform: scale(1.05);
-}
-.portfolio-card .project-item:active {
-  transform: scale(0.95);
-}
-
-section:not(#hero) > div,
-section:not(#hero) > h2,
-section:not(#hero) > p {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin: 2rem auto;
-  max-width: 1000px;
-  position: relative;
-  z-index: 1;
-}
-
-
-/* Clean up inline display issue, remove stray text */
-body > div[style^="4px"] { display: none; }
-
-/* Tinted white boxes for non-hero sections */
-.services-card,
-.portfolio-card,
-.detail-card,
-.accordion-content,
-.contact-form {
-  background: rgba(255,255,255,0.8) !important;
-  color: var(--wine-red);
-}
-
-/* Ensure wine-red boxes use white text */
-.service-item,
-.project-item,
-.accordion-btn,
-.partner-card a,
-.contact-form button {
-  color: var(--white) !important;
-}
-
-.about-pro .about-content {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 2rem;
-  align-items: center;
-}
-.about-pro .about-main h2 {
-  color: var(--wine-red);
-  margin-bottom: 0.5rem;
-}
-.about-lead {
-  font-size: 1.1rem;
-  color: var(--wine-red);
-  margin-bottom: 1.5rem;
-  font-weight: 500;
-}
-.about-strengths {
-  list-style: none;
-  padding: 0;
-  margin-bottom: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.7rem;
-}
-.about-strengths .icon {
-  font-size: 1.2rem;
-  margin-right: 0.5rem;
-}
-.about-desc {
-  color: #4b2c30;
-  margin-bottom: 1.5rem;
-}
-.about-cta {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-.about-image img {
-  width: 100%;
-  max-width: 240px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-.contact-pro h2 {
-  color: var(--wine-red);
-  margin-bottom: 0.3rem;
-}
-.contact-lead {
-  font-size: 1.1rem;
-  margin-bottom: 1.2rem;
-  color: #964553;
-  font-weight: 500;
-}
-.contact-content {
-  display: grid;
-  grid-template-columns: 1fr 1.2fr;
-  gap: 2rem;
-  align-items: start;
-}
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 1.3rem;
-  font-size: 1.1rem;
-  color: var(--wine-red);
-  font-weight: 500;
-}
-.contact-info .icon {
-  font-size: 1.3rem;
-  margin-right: 0.6rem;
-  vertical-align: middle;
-}
-.contact-form {
-  background: rgba(255,255,255,0.6);
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-}
-.contact-form input, .contact-form textarea {
-  border: 1px solid #cbb;
-  border-radius: 4px;
-  padding: 0.7rem;
-  font-size: 1rem;
-}
-.contact-form button {
-  background: var(--wine-red);
-  color: var(--white);
-  padding: 0.9rem;
-  border: none;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.contact-form button:hover {
-  background: #a14d54;
-}
-.robot-check {
-  color: var(--wine-red);
-  font-size: 1rem;
-}
-@media (max-width: 800px) {
-  .about-pro .about-content,
-  .contact-content {
-    grid-template-columns: 1fr;
-    gap: 1.2rem;
-  }
-  .about-image img {
-    max-width: 100%;
-  }
-}
-
-</style>
+    @keyframes heroGradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hero-lead { font-size:1.4rem; margin-top:1rem; margin-bottom:2rem; }
+    .stats { display:flex; gap:2rem; justify-content:center; margin:2rem 0;}
+    .stat-block { background:rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem 2rem; color:#fff; font-size:1.2rem;}
+    .cta-btn { background:var(--white); color:var(--wine-red); border:none; border-radius:4px; font-weight:600; padding:0.9rem 2rem; font-size:1.1rem; margin-top:1rem; cursor:pointer; box-shadow:0 4px 12px var(--card-shadow);}
+    .cta-btn:hover { background:#f5f5f5;}
+    #about .about-wrap {display:grid; grid-template-columns:1.3fr 1fr; gap:2rem; align-items:center; background:var(--white); border-radius:12px; box-shadow:0 4px 16px var(--card-shadow);}
+    #about img {width:100%; max-width:350px; border-radius:12px;}
+    .about-main h2 {margin-bottom:0.5rem;}
+    .about-lead {font-size:1.1rem; color:var(--wine-red); margin-bottom:1.5rem; font-weight:500;}
+    .about-strengths {list-style:none; padding:0; margin-bottom:1.5rem;}
+    .about-strengths li {margin-bottom:0.5rem; font-size:1rem;}
+    .about-desc {color: #4b2c30; margin-bottom:1.5rem;}
+    .about-cta {display:flex; gap:1rem; align-items:center;}
+    #services .services-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .service-list {display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; margin-top:2rem;}
+    .service-item {background:var(--wine-red); color:var(--white); padding:1.5rem 2.2rem; border-radius:8px; font-size:1.2rem; font-weight:600; transition:transform .2s; cursor:pointer;}
+    .service-item:hover {transform:scale(1.05);}
+    #case-study {background:var(--accent);}
+    .case-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .case-title {color:var(--wine-red);}
+    .case-detail {margin-top:1rem; font-size:1.08rem;}
+    #tech-stack .tech-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .tech-logos {display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; align-items:center;}
+    .tech-logo {height:40px; filter: grayscale(0.2);}
+    #industries .industries-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .industry-list {display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;}
+    .industry-item {background:var(--wine-red); color:var(--white); padding:1rem 1.7rem; border-radius:6px; font-weight:500;}
+    #portfolio .portfolio-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .projects {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
+    .project-item {background:var(--wine-red); color:var(--white); padding:1rem 1.5rem; border-radius:8px; cursor:pointer; font-weight:500; transition:transform .2s;}
+    .project-item:hover {transform:scale(1.05);}
+    #certifications .cert-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .cert-list {display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; margin-top:1.2rem;}
+    .cert-badge {background:var(--accent); color:var(--wine-red); font-weight:700; border-radius:6px; padding:0.8rem 1.6rem;}
+    #testimonials .testi-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .testi-list {display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;}
+    .testi-item {background:var(--light-gray); border-radius:8px; padding:1.2rem 2rem; font-style:italic; min-width:220px;}
+    #blog .blog-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .blog-list {display:flex; gap:1.2rem; flex-wrap:wrap;}
+    .blog-item {background:var(--accent); border-radius:8px; padding:1rem 1.4rem;}
+    #resources .res-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .res-list {display:flex; gap:1.2rem; flex-wrap:wrap;}
+    .res-item {background:var(--wine-red); color:var(--white); border-radius:8px; padding:1.1rem 2rem; text-decoration:none;}
+    #languages .lang-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .lang-list {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
+    .lang-item {background:var(--wine-red); color:var(--white); border-radius:6px; padding:0.8rem 1.4rem;}
+    #contact .contact-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
+    .contact-content {display:grid; grid-template-columns:1.1fr 1.2fr; gap:2rem; align-items:start;}
+    .contact-info {display:flex; flex-direction:column; gap:0.9rem; font-size:1.1rem; color:var(--wine-red);}
+    .contact-form {display:flex; flex-direction:column; gap:0.8rem;}
+    .contact-form input, .contact-form textarea {padding:0.75rem; border:1px solid #ccc; border-radius:4px;}
+    .contact-form button {background:var(--wine-red); color:var(--white); padding:0.9rem; border:none; border-radius:4px; font-weight:600;}
+    footer {text-align:center; padding:2rem 0; color:var(--wine-red);}
+    .social-footer a {margin:0 0.5rem; color:var(--wine-red); text-decoration:none; font-size:1.2rem;}
+    @media (max-width:900px) {
+      .stats {flex-direction:column;}
+      #about .about-wrap {grid-template-columns:1fr;}
+      .contact-content {grid-template-columns:1fr;}
+    }
+  </style>
 </head>
 <body>
-  <div id="progress-bar"></div>
   <header>
     <a id="home-logo"><img src="/hepa-website/hepa-logo.png" alt="Hepa logo" class="site-logo"></a>
     <nav>
-      <a data-target="hero">Home</a>
-      <a data-target="about">About</a>
-      <a data-target="services">Services</a>
-      <a data-target="portfolio">Portfolio</a>
-      <a data-target="contact">Contact</a>
+      <a href="#hero">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#case-study">Case Study</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#blog">Blog</a>
+      <a href="#resources">Resources</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
-  <main id="main-slider">
+  <main>
     <section id="hero">
-      <!-- Hero heading only, no center logo -->
-      <h1 style="font-size:4rem;">Hepa Solutions</h1>
-      <button class="arrow right" data-target="about">&#8594;</button>
+      <div class="container">
+        <h1 style="font-size:3.2rem;">Hepa Solutions</h1>
+        <div class="hero-lead">
+          Your trusted partner in network engineering, automation, DevOps, platform engineering, and cybersecurity.<br>
+          Smart, secure, and scalable IT for tomorrow’s business.
+        </div>
+        <div class="stats">
+          <div class="stat-block">
+            <strong>10+ Years</strong><br>Expertise
+          </div>
+          <div class="stat-block">
+            <strong>50+ Projects</strong><br>Delivered
+          </div>
+          <div class="stat-block">
+            <strong>6 Languages</strong><br>International Service
+          </div>
+          <div class="stat-block">
+            <strong>100% SLA</strong><br>Client Satisfaction
+          </div>
+        </div>
+        <a href="#contact" class="cta-btn">Let’s Work Together</a>
+      </div>
     </section>
-    
-<section id="about">
-  <div class="portfolio-card about-pro">
-    <div class="about-content">
-      <div class="about-main">
-        <h2>About Hepa</h2>
-        <p class="about-lead">Blending innovation with deep expertise, <b>Hepa</b> delivers smart energy and network solutions for the modern world.</p>
-        <ul class="about-strengths">
-          <li><span class="icon">🚀</span> Cutting-edge IoT & automation</li>
-          <li><span class="icon">🌐</span> Secure, scalable network design</li>
-          <li><span class="icon">💡</span> Creative web & mobile solutions</li>
-          <li><span class="icon">🤝</span> Multidisciplinary, agile team</li>
-        </ul>
-        <p class="about-desc">We help businesses save energy, boost efficiency, and modernize IT—from smart building management to cloud-native web platforms. Let us accelerate your digital transformation.</p>
-        <div class="about-cta">
-          <button class="btn">Learn More</button>
-          <div class="partners-box" data-target="partners">Meet Partners</div>
+    <section id="about">
+      <div class="container about-wrap">
+        <div class="about-main">
+          <h2>About Hepa</h2>
+          <p class="about-lead">Blending innovation with deep expertise, <b>Hepa</b> delivers smart energy and network solutions for the modern world.</p>
+          <ul class="about-strengths">
+            <li>🚀 Automation & Orchestration</li>
+            <li>🌐 Secure, scalable network design</li>
+            <li>☁️ Cloud-native platforms & DevOps</li>
+            <li>🔒 Cybersecurity best practices</li>
+            <li>💡 Creative web & mobile solutions</li>
+            <li>🤝 Multidisciplinary, agile team</li>
+          </ul>
+          <p class="about-desc">We help businesses save energy, boost efficiency, and modernize IT—from smart building management to cloud-native platforms and network automation. Let us accelerate your digital transformation.</p>
+        </div>
+        <div>
+          <img src="hepa_about.png" alt="Team collaboration illustration">
         </div>
       </div>
-      <div class="about-image">
-        <img src="hepa_about.png" alt="Team collaboration illustration">
+    </section>
+    <section id="services">
+      <div class="container services-card">
+        <h2>Our Services</h2>
+        <div class="service-list">
+          <div class="service-item">Network Engineering</div>
+          <div class="service-item">DevOps & Platform Engineering</div>
+          <div class="service-item">Cloud Solutions (AWS, Azure)</div>
+          <div class="service-item">Cyber Security & Compliance</div>
+          <div class="service-item">IT Support & Managed Services</div>
+          <div class="service-item">Automation (CI/CD, Infra, Workflows)</div>
+          <div class="service-item">Data Analytics & IoT</div>
+          <div class="service-item">Web & Mobile Development</div>
+          <div class="service-item">Digital Transformation Consulting</div>
+          <div class="service-item">Training & Workshops</div>
+        </div>
       </div>
-    </div>
-  </div>
-  <button class="arrow left" data-target="hero">&#8592;</button>
-  <button class="arrow right" data-target="services">&#8594;</button>
-</section>
-
-    <section id="tech-kosova" style="background: var(--light-gray) url('hepa-kosovatech-background.png') center/cover no-repeat; color: var(--black); padding: 4rem 2rem; position: relative;"> <div class="tech-text">
-    <h2>Tech Companies in Kosova</h2>
-    <p>…your copy…</p>
-  </div>
-</section>
-
-  <button class="arrow left" data-target="about" aria-label="Previous section: About">&#8592;</button>
-  <button class="arrow right" data-target="services" aria-label="Next section: Services">&#8594;</button>
-  <div style="max-width:800px; margin:auto; text-align:center; position:relative; z-index:1;">
-    <h2 style="font-size:2.5rem; color:var(--wine-red); margin-bottom:1rem;">Tech Companies in Kosova</h2>
-    <p style="font-size:1rem; line-height:1.6;">
-      Kosova's technology sector has rapidly gained recognition for delivering outstanding outsourced services. Local firms combine deep technical expertise, agile methodologies, and competitive pricing to serve clients worldwide. With strong education backgrounds, multilingual teams, and a vibrant startup culture, Kosova-based tech companies excel in software development, system integration, and digital innovation, making them trusted partners for global businesses seeking reliable and high-quality solutions.
-    </p>
-  </div>
-</section>
-
-
-<section id="services">
-  <div class="services-card portfolio-card">
-    <h2>Our Services</h2>
-    <div class="service-list">
-      <div class="service-item" data-target="service-details">Web Design</div>
-      <div class="service-item" data-target="service-details">Automation</div>
-      <div class="service-item" data-target="service-details">Network Solutions</div>
-    </div>
-  </div>
-  <button class="arrow left" data-target="about">&#8592;</button>
-  <button class="arrow right" data-target="portfolio">&#8594;</button>
-</section>
-
-    
-<section id="portfolio">
-  <div class="portfolio-card">
-    <h2>Recent Projects</h2>
-    <div class="projects">
-      <div class="project-item" data-target="project-details">Site Revamp</div>
-      <div class="project-item" data-target="project-details">Workflow Automation</div>
-      <div class="project-item" data-target="project-details">Network Overhaul</div>
-    </div>
-  </div>
-  <button class="arrow left" data-target="services">&#8592;</button>
-  <button class="arrow right" data-target="contact">&#8594;</button>
-</section>
-
-    
-<section id="awards">
-  <div class="portfolio-card">
-    <h2>Awards, Certifications & Partnerships</h2>
-    <div class="badge-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(100px,1fr)); gap:2rem; align-items:center; justify-items:center;">
-      <img src="badge-cert-1.png" alt="Certification 1" style="max-width:80px;">
-      <img src="badge-cert-2.png" alt="Certification 2" style="max-width:80px;">
-      <img src="badge-cert-3.png" alt="Award 1" style="max-width:80px;">
-      <img src="badge-partner-1.png" alt="Partner Company" style="max-width:80px;">
-    </div>
-  </div>
-  <button class="arrow left" data-target="portfolio">&#8592;</button>
-  <button class="arrow right" data-target="contact">&#8594;</button>
-</section>
-
-
-
-
-<section id="contact">
-  <div class="portfolio-card contact-pro">
-    <h2>Contact Us</h2>
-    <p class="contact-lead">Ready to take your business to the next level? Let’s talk.</p>
-    <div class="contact-content">
-      <div class="contact-info">
-        <div><span class="icon">📍</span> Prishtina, Kosovo</div>
-        <div><span class="icon">✉️</span> info@hepa.com</div>
-        <div><span class="icon">📞</span> +383 44 123 456</div>
+    </section>
+    <section id="case-study">
+      <div class="container case-wrap">
+        <h2 class="case-title">Case Study: Data Center & Network Automation</h2>
+        <div class="case-detail">
+          <b>Challenge:</b> Automate provisioning for large-scale data center infrastructure across multi-subnet and multi-VLAN environments.<br><br>
+          <b>Our Solution:</b> Leveraged Tinkerbell, PXE boot, and custom BYO DHCP to automate infrastructure bring-up. Designed scalable Kubernetes clusters (EKS & bare-metal) with advanced Cilium BGP and high-availability using Keepalived VIPs and both Active-Active and Active-Standby network models. Developed Day 0/1 Arista EOS templates (VRF, static routing, IP planning). Integrated DHCP relay, netplan, and FRR for robust underlay BGP peering. Automated all network and platform workflows via GitLab CI/CD pipelines, including deployment and IPAM documentation with Git-driven diagrams.<br><br>
+          <b>Result:</b> Reduced manual deployment time by 70%, enabled rapid scale-up, and ensured compliance with security and documentation standards.
+        </div>
       </div>
-      <form class="contact-form">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-        <label class="robot-check"><input type="checkbox" required> I am not a robot</label>
-        <button type="submit">Send Message</button>
-      </form>
-    </div>
-  </div>
-  <button class="arrow left" data-target="awards">&#8592;</button>
-</section>
-
-
+    </section>
+    <section id="tech-stack">
+      <div class="container tech-wrap">
+        <h2>Our Core Technology Stack</h2>
+        <div class="tech-logos">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cisco/cisco-original.svg" class="tech-logo" alt="Cisco" title="Cisco">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" class="tech-logo" alt="AWS" title="AWS">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" class="tech-logo" alt="Azure" title="Azure">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="tech-logo" alt="Kubernetes" title="Kubernetes">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="tech-logo" alt="Linux" title="Linux">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-logo" alt="Python" title="Python">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" class="tech-logo" alt="Ansible" title="Ansible">
+        </div>
+      </div>
+    </section>
+    <section id="industries">
+      <div class="container industries-wrap">
+        <h2>Industries We Serve</h2>
+        <div class="industry-list">
+          <div class="industry-item">Finance</div>
+          <div class="industry-item">Healthcare</div>
+          <div class="industry-item">Retail & E-commerce</div>
+          <div class="industry-item">Manufacturing</div>
+          <div class="industry-item">Startups</div>
+          <div class="industry-item">Government</div>
+          <div class="industry-item">Telecom</div>
+          <div class="industry-item">Smart Buildings</div>
+          <div class="industry-item">Education</div>
+          <div class="industry-item">Any business ready to digitalize!</div>
+        </div>
+      </div>
+    </section>
+    <section id="portfolio">
+      <div class="container portfolio-card">
+        <h2>Recent Projects</h2>
+        <div class="projects">
+          <div class="project-item">DC Automation Platform</div>
+          <div class="project-item">Hybrid Cloud Migration</div>
+          <div class="project-item">Network Overhaul for SMB</div>
+          <div class="project-item">Secure IoT Rollout</div>
+          <div class="project-item">Custom Web Dashboard</div>
+        </div>
+      </div>
+    </section>
+    <section id="certifications">
+      <div class="container cert-wrap">
+        <h2>Certifications & Awards</h2>
+        <div class="cert-list">
+          <div class="cert-badge">Cisco CCNA</div>
+          <div class="cert-badge">Cisco CCNP</div>
+          <div class="cert-badge">CKAD</div>
+          <div class="cert-badge">CKA</div>
+          <div class="cert-badge">Fortinet NSE</div>
+          <div class="cert-badge">AWS</div>
+          <div class="cert-badge">Azure</div>
+          <div class="cert-badge">Python</div>
+          <div class="cert-badge">Linux</div>
+          <div class="cert-badge">Ansible</div>
+          <div class="cert-badge">Java</div>
+        </div>
+        <p style="text-align:center; margin-top:1.5rem; color:#964553;">
+          <em>We believe in continuous learning and industry best practices.</em>
+        </p>
+      </div>
+    </section>
+    <section id="testimonials">
+      <div class="container testi-wrap">
+        <h2>What Our Clients Say</h2>
+        <div class="testi-list">
+          <div class="testi-item">
+            “Hepa Solutions delivered a seamless network migration for our HQ. Professional, proactive, and always a step ahead!”
+            <br>– CEO, FinTech Client
+          </div>
+          <div class="testi-item">
+            “Their automation frameworks saved us hundreds of hours and eliminated manual errors.”
+            <br>– IT Manager, Manufacturing
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="blog">
+      <div class="container blog-wrap">
+        <h2>From the Knowledge Base</h2>
+        <div class="blog-list">
+          <div class="blog-item"><b>5 Security Mistakes SMBs Make (And How to Fix Them)</b></div>
+          <div class="blog-item"><b>Beginner's Guide to CI/CD Automation</b></div>
+          <div class="blog-item"><b>Optimizing Hybrid Cloud with Kubernetes</b></div>
+          <div class="blog-item"><b>Why Network Segmentation Matters in 2025</b></div>
+        </div>
+      </div>
+    </section>
+    <section id="resources">
+      <div class="container res-wrap">
+        <h2>Free Resources</h2>
+        <div class="res-list">
+          <a class="res-item" href="#" download>Network Security Checklist (PDF)</a>
+          <a class="res-item" href="#" download>Cloud Migration Planning Guide</a>
+          <a class="res-item" href="#" download>Kubernetes Day 0/1 Template Sample</a>
+        </div>
+        <div style="margin-top:1.2rem; font-size:1.03rem; color:var(--wine-red);">
+          Want more? <a href="#contact" style="color:var(--wine-red); text-decoration:underline;">Contact us for a tailored assessment</a>
+        </div>
+      </div>
+    </section>
+    <section id="languages">
+      <div class="container lang-wrap">
+        <h2>Languages We Speak</h2>
+        <div class="lang-list">
+          <div class="lang-item">English</div>
+          <div class="lang-item">Albanian</div>
+          <div class="lang-item">German</div>
+          <div class="lang-item">Italian</div>
+          <div class="lang-item">Spanish</div>
+          <div class="lang-item">Polish</div>
+          <div class="lang-item">Croatian</div>
+        </div>
+        <p style="margin-top:1.2rem; color:#964553;">We offer service and contracts in all supported languages!</p>
+      </div>
+    </section>
+    <section id="contact">
+      <div class="container contact-card">
+        <h2>Contact Us</h2>
+        <p style="font-size:1.15rem; color:#964553;">
+          Ready to transform your IT? Let’s talk about your project or support needs.<br>
+          <b>We are open for new clients!</b>
+        </p>
+        <div class="contact-content">
+          <div class="contact-info">
+            <div>📍 Prishtina, Kosovo</div>
+            <div>✉️ info@hepa.com</div>
+            <div>📞 +383 44 123 456</div>
+          </div>
+          <form class="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+            <label><input type="checkbox" required> I am not a robot</label>
+            <button type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
   </main>
-  <section id="service-details" style="background: var(--light-gray); padding: 4rem 2rem;">
-  <h2 style="text-align:center; color:var(--wine-red); margin-bottom:2rem;">Service Deep Dive</h2>
-  <div class="details-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; max-width:1000px; margin:auto;">
-    <div class="detail-card" style="background:var(--white); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Web Design</h3>
-      <p>We craft responsive, modern websites focused on UX. From wireframe to deployment, each site is tailored to your brand.</p>
+  <footer>
+    <div>© 2025 Hepa Solutions | Built with pride in Kosovo</div>
+    <div class="social-footer">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
     </div>
-    <div class="detail-card" style="background:var(--white); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Automation</h3>
-      <p>Our automation frameworks remove manual bottlenecks. Automate workflows, data pipelines, and system integrations seamlessly.</p>
-    </div>
-    <div class="detail-card" style="background:var(--white); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Network Solutions</h3>
-      <p>Secure, scalable network architectures with end-to-end monitoring. We ensure high availability and robust security.</p>
-    </div>
-  </div>
-</section>
-  <section id="project-details" style="background: var(--white); padding: 4rem 2rem;">
-  <h2 style="text-align:center; color:var(--wine-red); margin-bottom:2rem;">Project Showcase & FAQ</h2>
-  <div class="details-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap:2rem; max-width:1000px; margin:auto;">
-    <!-- Project Cards -->
-    <div style="display:grid; gap:1rem;">
-      <div class="detail-card" style="background:var(--light-gray); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-        <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Site Revamp</h3>
-        <p>Improved load speed by 50% and enhanced UX with a modern interface.</p>
-      </div>
-      <div class="detail-card" style="background:var(--light-gray); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-        <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Workflow Automation</h3>
-        <p>Streamlined approval workflows, reducing manual steps and errors.</p>
-      </div>
-      <div class="detail-card" style="background:var(--light-gray); padding:1.5rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow);">
-        <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Network Overhaul</h3>
-        <p>Redesigned network topology with VLANs and advanced firewall rules.</p>
-      </div>
-    </div>
-    <!-- FAQ Accordion -->
-    <div style="display:flex; flex-direction:column; gap:1rem;">
-      <div class="accordion-item" style="overflow:hidden;">
-        <button class="accordion-btn" style="width:100%; padding:1rem; background:var(--wine-red); color:var(--white); border:none; cursor:pointer; text-align:left; border-radius:4px;">How long does a typical project take?</button>
-        <div class="accordion-content" style="max-height:0; overflow:hidden; transition:max-height .3s ease; background:var(--white); padding:0 1rem; border-radius:0 0 4px 4px;">
-          <p style="padding:1rem 0;">Most projects range from 4 to 12 weeks depending on complexity and scope.</p>
-        </div>
-      </div>
-      <div class="accordion-item" style="overflow:hidden;">
-        <button class="accordion-btn" style="width:100%; padding:1rem; background:var(--wine-red); color:var(--white); border:none; cursor:pointer; text-align:left; border-radius:4px;">What are your rates?</button>
-        <div class="accordion-content" style="max-height:0; overflow:hidden; transition:max-height .3s ease; background:var(--white); padding:0 1rem; border-radius:0 0 4px 4px;">
-          <p style="padding:1rem 0;">Our rates vary by project – contact us for a tailored quote.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-  <section id="partners" style="background: var(--light-gray); padding: 4rem 2rem; height: calc(100vh - 72px); scroll-snap-align: start; position: relative;">
-  <button class="arrow left" data-target="project-details" aria-label="Previous section: Project Showcase & FAQ">&#8592;</button>
-  <button class="arrow right" data-target="awards" aria-label="Next section: Awards & Partnerships">&#8594;</button>
-  <div style="max-width:1200px; margin:auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; align-items:flex-start;">
-    <!-- Partner Card: Drin Asani -->
-    <div style="background:var(--white); padding:2rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow); display:flex; flex-direction:column; align-items:center; text-align:center;">
-      <img src="placeholder-drinasani.jpg" alt="Drin Asani photo" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Drin Asani</h3>
-      <p style="flex:1;">Drin Asani is a seasoned IoT architect with over 10 years of experience designing smart building solutions. Passionate about sustainable tech, Drin leads cross-functional teams in deploying scalable automation platforms.</p>
-      <a href="https://linkedin.com/in/drinasani" target="_blank" style="margin-top:1rem; background:var(--wine-red); color:var(--white); padding:0.5rem 1rem; border-radius:4px; text-decoration:none;">LinkedIn</a>
-    </div>
-    <!-- Partner Card: Kron Hajdini -->
-    <div style="background:var(--white); padding:2rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow); display:flex; flex-direction:column; align-items:center; text-align:center;">
-      <img src="placeholder-kronhajdini.jpg" alt="Kron Hajdini photo" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Kron Hajdini</h3>
-      <p style="flex:1;">Kron Hajdini specializes in full-stack web development and cloud infrastructure. With a knack for elegant UI/UX, Kron has delivered multiple high-profile web apps and improved performance by 40% on average.</p>
-      <a href="https://linkedin.com/in/kronhajdini" target="_blank" style="margin-top:1rem; background:var(--wine-red); color:var(--white); padding:0.5rem 1rem; border-radius:4px; text-decoration:none;">LinkedIn</a>
-    </div>
-    <!-- Partner Card: Clirim Serrmaxhaj -->
-    <div style="background:var(--white); padding:2rem; border-radius:8px; box-shadow:0 2px 6px var(--card-shadow); display:flex; flex-direction:column; align-items:center; text-align:center;">
-      <img src="placeholder-clirim.jpg" alt="Clirim Serrmaxhaj photo" style="width:120px; height:120px; border-radius:50%; object-fit:cover; margin-bottom:1rem;">
-      <h3 style="color:var(--wine-red); margin-bottom:0.5rem;">Clirim Serrmaxhaj</h3>
-      <p style="flex:1;">Clirim Serrmaxhaj is an expert network engineer and cybersecurity specialist, holding multiple certifications. Clirim designs resilient network architectures and ensures compliance with the latest security standards.</p>
-      <a href="https://linkedin.com/in/clirimserrmaxhaj" target="_blank" style="margin-top:1rem; background:var(--wine-red); color:var(--white); padding:0.5rem 1rem; border-radius:4px; text-decoration:none;">LinkedIn</a>
-    </div>
-  </div>
-</section><script>
-    // Progress bar
-    const progress = document.getElementById('progress-bar');
-    window.addEventListener('scroll', () => {
-      const ratio = window.scrollY / (document.body.scrollHeight - window.innerHeight);
-      progress.style.width = ratio * 100 + '%';
-    });
-    // Slider navigation
-    const slider = document.getElementById('main-slider');
-    document.querySelectorAll('.arrow, nav a, .partners-box, .service-item, .project-item').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tgt = btn.getAttribute('data-target');
-        if (tgt === 'partners') {
-          const sec = document.getElementById('partners'); sec.classList.add('active'); sec.scrollIntoView({behavior:'smooth', block:'start'});
-        } else if (['service-details','project-details'].includes(tgt)) {
-          const sec = document.getElementById(tgt); sec.classList.add('active'); sec.scrollIntoView({behavior:'smooth', block:'start'});
-        } else {
-          const idx = [...slider.children].findIndex(s => s.id === tgt);
-          if (idx >= 0) slider.scrollTo({left: idx * window.innerWidth, behavior: 'smooth'});
-        }
-      });
-    });
-    // Accordion
-    document.querySelectorAll('.accordion-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const content = btn.nextElementSibling;
-        const open = btn.classList.toggle('active');
-        content.style.maxHeight = open ? content.scrollHeight + 'px' : '0';
-      });
-    });
-  </script>
+    <div style="margin-top:0.7rem; font-size:0.98rem;">Looking to join our team? <b>We’re open for project partnerships and freelance experts. <a href="#contact" style="color:var(--wine-red);">Contact us</a></b></div>
+  </footer>
 </body>
 </html>
