@@ -212,10 +212,6 @@
   transform: scale(0.95);
 }
 
-/* White boxes and wine-red text for all non-hero sections */
-section:not(#hero) * {
-  color: var(--wine-red) !important;
-}
 section:not(#hero) > div,
 section:not(#hero) > h2,
 section:not(#hero) > p {
@@ -229,61 +225,28 @@ section:not(#hero) > p {
   z-index: 1;
 }
 
-</style> {
-    position: relative;
-    z-index: 1;
-  }
 
-/* Portfolio Card and Animation */
-.portfolio-card {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-.portfolio-card .projects {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  justify-content: center;
-}
-.portfolio-card .project-item {
-  background: var(--wine-red);
-  color: var(--white);
-  padding: 1rem 1.5rem;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: transform 0.3s ease, background 0.3s ease;
-}
-.portfolio-card .project-item:hover {
-  transform: scale(1.05);
-}
-.portfolio-card .project-item:active {
-  transform: scale(0.95);
+/* Clean up inline display issue, remove stray text */
+body > div[style^="4px"] { display: none; }
+
+/* Tinted white boxes for non-hero sections */
+.services-card,
+.portfolio-card,
+.detail-card,
+.accordion-content,
+.contact-form {
+  background: rgba(255,255,255,0.8) !important;
+  color: var(--wine-red);
 }
 
-/* White boxes and wine-red text for all non-hero sections */
-section:not(#hero) * {
-  color: var(--wine-red) !important;
+/* Ensure wine-red boxes use white text */
+.service-item,
+.project-item,
+.accordion-btn,
+.partner-card a,
+.contact-form button {
+  color: var(--white) !important;
 }
-section:not(#hero) > div,
-section:not(#hero) > h2,
-section:not(#hero) > p {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  margin: 2rem auto;
-  max-width: 1000px;
-  position: relative;
-  z-index: 1;
-}
-
 </style>
 </head>
 <body>
