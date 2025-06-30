@@ -32,14 +32,7 @@
     #hero { background:var(--wine-red); color:var(--white); text-align:center; }
     #about { background: var(--light-gray) url('hepa-aboutus-background.png') center/cover no-repeat; color: var(--black); }
     /* Box around the About text for better contrast */
-  #about .about-text {
-  background: var(--white);                /* solid white box */
-  padding: 2rem;                           /* room around your copy */
-  border-radius: 8px;                      /* soften the corners */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);  /* subtle lift off the page */
-  max-width: 500px;                        /* control the line-length */
-  margin: auto;                            /* center in its grid cell */
-}
+  
   /* Card around the Tech Companies text for better contrast */
 #tech-kosova .tech-text {
   background: var(--white);
@@ -90,19 +83,7 @@
     .service-item { background:var(--white); color:var(--black); padding:1rem; border-radius:8px; cursor:pointer; transition:transform .2s; }
     .service-item:hover { transform:scale(1.05); }
     
-.services-card {
 
-.portfolio-card {
-  background: var(--white);
-  padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-width: 800px;
-  margin: auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
 
   background: var(--white);
   padding: 2rem;
@@ -271,7 +252,7 @@ body > div[style^="4px"] { display: none; }
   <!-- Navigation Arrows -->
   <button class="arrow left" data-target="hero" aria-label="Previous section: Hero">&#8592;</button>
   <button class="arrow right" data-target="services" aria-label="Next section: Services">&#8594;</button>
-  <div class="about-container" style="max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
+  <div class="portfolio-card about-container" style="max-width: 1000px; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center;">
     <div class="about-text" style="display: flex; flex-direction: column; gap: 1.5rem;">
       <h2 style="font-size: 2.5rem; font-weight: 700; color: var(--wine-red);">About Hepa</h2>
       <p style="font-size: 1rem; line-height: 1.6;">At Hepa, we blend innovation with expertise to deliver cutting-edge IoT, web design, and network solutions that drive efficiency and growth.</p>
@@ -308,7 +289,7 @@ body > div[style^="4px"] { display: none; }
 
 
 <section id="services">
-  <div class="services-card">
+  <div class="services-card portfolio-card">
     <h2>Our Services</h2>
     <div class="service-list">
       <div class="service-item" data-target="service-details">Web Design</div>
