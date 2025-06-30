@@ -46,7 +46,6 @@
     .stat-block { background:rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem 2rem; color:#fff; font-size:1.2rem;}
     .cta-btn { background:var(--white); color:var(--wine-red); border:none; border-radius:4px; font-weight:600; padding:0.9rem 2rem; font-size:1.1rem; margin-top:1rem; cursor:pointer; box-shadow:0 4px 12px var(--card-shadow);}
     .cta-btn:hover { background:#f5f5f5;}
-    /* Updated About section styles */
     #about .container {
       background: var(--white);
       border-radius: 16px;
@@ -61,7 +60,32 @@
       border-radius:16px;
       box-shadow:0 2px 6px var(--card-shadow);
     }
-    /* Other sections use old styling */
+    /* Kosovo Outsourcing Section */
+    #outsourcing-kosovo .container {
+      background: var(--white);
+      border-radius: 16px;
+      box-shadow: 0 4px 16px var(--card-shadow);
+      padding: 2.5rem;
+      text-align: center;
+      max-width: 800px;
+    }
+    #outsourcing-kosovo img {
+      width: 90px;
+      max-width: 100%;
+      margin-bottom: 1.1rem;
+      filter: grayscale(0.3) drop-shadow(0 2px 10px rgba(0,0,0,0.10));
+      border-radius: 8px;
+    }
+    #outsourcing-kosovo p {
+      font-size:1.11rem;
+      color:#4b2c30;
+      line-height:1.7;
+      text-align:left;
+      margin: 0 auto;
+      max-width: 650px;
+    }
+    #outsourcing-kosovo a { color:var(--wine-red); }
+    /* Other sections */
     #services .services-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .service-list {display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; margin-top:2rem;}
     .service-item {background:var(--wine-red); color:var(--white); padding:1.5rem 2.2rem; border-radius:8px; font-size:1.2rem; font-weight:600; transition:transform .2s; cursor:pointer;}
@@ -106,6 +130,7 @@
     @media (max-width:900px) {
       .stats {flex-direction:column;}
       #about .container {max-width:100%;}
+      #outsourcing-kosovo .container {max-width:100%;}
       .contact-content {grid-template-columns:1fr;}
     }
   </style>
@@ -169,7 +194,21 @@
         </p>
       </div>
     </section>
-    <!-- Rest of your website is unchanged below... -->
+
+    <!-- Kosovo Outsourcing Section -->
+    <section id="outsourcing-kosovo">
+      <div class="container">
+        <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/7/76/Kosovo_in_Europe_%28zoomed%29.svg" 
+          alt="Map of Kosovo"
+        >
+        <h2 style="color:var(--wine-red); margin-bottom:1rem;">Your Trusted Outsourcing Destination—Kosovo</h2>
+        <p>
+          Kosovo has rapidly emerged as a premier destination for tech outsourcing, offering clients around the world not just cost-effective solutions but also consistently high-quality, on-time delivery. The ICT sector—designated a national priority—has grown exponentially: software development employment jumped from 823 in 2019 to 2,345 in 2023 (a ~185% increase), while call-center turnover surged 69% in just two years, reaching €98 million in 2023 <a href="https://outsourcing-destinations.org" target="_blank">outsourcing-destinations.org</a>, <a href="https://opendatakosovo.org" target="_blank">opendatakosovo.org</a>. With a 96.4% internet penetration rate and annual graduation of over 2,600 IT and engineering students <a href="https://kutia.net" target="_blank">kutia.net</a>, Kosovo offers a young, agile, English-fluent talent pool eager to deliver. Supported by government-backed digital infrastructure initiatives and competitive labor costs, Kosovo firms have maintained a ~30% annual export and employment growth since 2020 <a href="https://linkedin.com" target="_blank">linkedin.com</a>, <a href="https://kutia.net" target="_blank">kutia.net</a>, <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>. In the context of a global IT outsourcing market forecasted to exceed US $591 billion in 2025 <a href="https://mindinventory.com" target="_blank">mindinventory.com</a>, <a href="https://dreamix.eu" target="_blank">dreamix.eu</a>, <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>, Kosovo stands out—especially for European nearshore engagement—by combining Western-quality standards, timezone alignment, and approximately 60% of companies preferring nearshore models for collaboration ease <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>, <a href="https://linkedin.com" target="_blank">linkedin.com</a>, <a href="https://cbi.eu" target="_blank">cbi.eu</a>. Whether you're a client based in Kosovo, elsewhere in Europe, or halfway around the globe, choosing us means tapping into a maturing tech ecosystem that delivers reliable, scalable, and high-touch outsourced solutions—on time, on budget, and beyond expectations.
+        </p>
+      </div>
+    </section>
+
     <section id="services">
       <div class="container services-card">
         <h2>Our Services</h2>
