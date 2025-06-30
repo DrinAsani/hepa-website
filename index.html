@@ -61,7 +61,15 @@
   padding: 4rem 2rem;
   position: relative;
 }
-    #portfolio { background:var(--white); color:var(--black); }
+    #portfolio {
+  background: url('hepa-ourprojects-background.png') center/cover no-repeat;
+  color: var(--black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  position: relative;
+}
     #contact { background:var(--white); color:var(--black); }
     /* Hero */
     #hero h1 { font-size:3rem; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:1rem; }
@@ -83,6 +91,19 @@
     .service-item:hover { transform:scale(1.05); }
     
 .services-card {
+
+.portfolio-card {
+  background: var(--white);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 800px;
+  margin: auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
   background: var(--white);
   padding: 2rem;
   border-radius: 12px;
@@ -234,16 +255,20 @@
   <button class="arrow right" data-target="portfolio">&#8594;</button>
 </section>
 
-    <section id="portfolio">
-      <h2>Recent Projects</h2>
-      <div class="projects">
-        <div class="project-item" data-target="project-details">Site Revamp</div>
-        <div class="project-item" data-target="project-details">Workflow Automation</div>
-        <div class="project-item" data-target="project-details">Network Overhaul</div>
-      </div>
-      <button class="arrow left" data-target="services">&#8592;</button>
-      <button class="arrow right" data-target="contact">&#8594;</button>
-    </section>
+    
+<section id="portfolio">
+  <div class="portfolio-card">
+    <h2>Recent Projects</h2>
+    <div class="projects">
+      <div class="project-item" data-target="project-details">Site Revamp</div>
+      <div class="project-item" data-target="project-details">Workflow Automation</div>
+      <div class="project-item" data-target="project-details">Network Overhaul</div>
+    </div>
+  </div>
+  <button class="arrow left" data-target="services">&#8592;</button>
+  <button class="arrow right" data-target="contact">&#8594;</button>
+</section>
+
     <section id="awards" style="background: var(--white); color: var(--black); padding: 4rem 2rem;">
   <div style="max-width:800px; margin:auto; text-align:center; position:relative;">
     <h2 style="font-size:2.5rem; color:var(--wine-red); margin-bottom:1.5rem;">Awards, Certifications & Partnerships</h2>
