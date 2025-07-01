@@ -4,7 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hepa Solutions – IT, Network & Automation</title>
+  <meta name="description" content="Kosovo's leading IT outsourcing, network engineering, cloud, and automation partner.">
+  <meta name="keywords" content="Kosovo IT, outsourcing, DevOps, cybersecurity, network engineering, cloud, Hepa Solutions">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
   <style>
     :root {
       --wine-red: #722F37;
@@ -13,14 +16,15 @@
       --light-gray: #f5f5f5;
       --card-shadow: rgba(0,0,0,0.1);
       --accent: #e0e6f7;
+      --main-btn-hover: #d7bac3;
     }
     * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { height:100%; overflow-x:hidden; scroll-behavior:smooth; }
+    html { height:100%; overflow-x:hidden; scroll-behavior:smooth; }
     body { font-family:'Poppins', sans-serif; color:var(--black); background:var(--light-gray);}
     header { position:fixed; top:0; left:0; right:0; background:var(--white); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 4px var(--card-shadow); z-index:999; }
     .site-logo { height:60px; cursor:pointer; }
-    nav a { margin-left:1rem; color:var(--wine-red); text-decoration:none; font-weight:500; cursor:pointer; outline:none; }
-    nav a:focus { outline:2px solid var(--wine-red); }
+    nav[aria-label] a { margin-left:1rem; color:var(--wine-red); text-decoration:none; font-weight:500; cursor:pointer; outline:none; }
+    nav[aria-label] a:focus { outline:2px solid var(--wine-red); }
     main { margin-top:80px; }
     section { padding:4rem 2rem; position:relative; }
     h1,h2,h3 { font-weight:700; }
@@ -44,8 +48,8 @@
     .hero-lead { font-size:1.4rem; margin-top:1rem; margin-bottom:2rem; }
     .stats { display:flex; gap:2rem; justify-content:center; margin:2rem 0;}
     .stat-block { background:rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem 2rem; color:#fff; font-size:1.2rem;}
-    .cta-btn { background:var(--white); color:var(--wine-red); border:none; border-radius:4px; font-weight:600; padding:0.9rem 2rem; font-size:1.1rem; margin-top:1rem; cursor:pointer; box-shadow:0 4px 12px var(--card-shadow);}
-    .cta-btn:hover { background:#f5f5f5;}
+    .cta-btn { background:var(--white); color:var(--wine-red); border:none; border-radius:4px; font-weight:600; padding:0.9rem 2rem; font-size:1.1rem; margin-top:1rem; cursor:pointer; box-shadow:0 4px 12px var(--card-shadow); transition: all 0.15s;}
+    .cta-btn:hover { background:var(--main-btn-hover); color: var(--wine-red); transform: scale(1.04);}
     #about .container {
       background: var(--white);
       border-radius: 16px;
@@ -60,7 +64,6 @@
       border-radius:16px;
       box-shadow:0 2px 6px var(--card-shadow);
     }
-    /* Kosovo Outsourcing Section */
     #outsourcing-kosovo .container {
       background: var(--white);
       border-radius: 16px;
@@ -85,11 +88,10 @@
       max-width: 650px;
     }
     #outsourcing-kosovo a { color:var(--wine-red); }
-    /* Other sections */
     #services .services-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .service-list {display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; margin-top:2rem;}
-    .service-item {background:var(--wine-red); color:var(--white); padding:1.5rem 2.2rem; border-radius:8px; font-size:1.2rem; font-weight:600; transition:transform .2s; cursor:pointer;}
-    .service-item:hover {transform:scale(1.05);}
+    .service-item {background:var(--wine-red); color:var(--white); padding:1.5rem 2.2rem; border-radius:8px; font-size:1.2rem; font-weight:600; transition:transform .2s, background 0.15s, color 0.15s;}
+    .service-item:hover {transform:scale(1.04); background:var(--main-btn-hover); color: var(--wine-red);}
     #case-study {background:var(--accent);}
     .case-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .case-title {color:var(--wine-red);}
@@ -102,8 +104,8 @@
     .industry-item {background:var(--wine-red); color:var(--white); padding:1rem 1.7rem; border-radius:6px; font-weight:500;}
     #portfolio .portfolio-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .projects {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
-    .project-item {background:var(--wine-red); color:var(--white); padding:1rem 1.5rem; border-radius:8px; cursor:pointer; font-weight:500; transition:transform .2s;}
-    .project-item:hover {transform:scale(1.05);}
+    .project-item {background:var(--wine-red); color:var(--white); padding:1rem 1.5rem; border-radius:8px; cursor:pointer; font-weight:500; transition:transform .2s, background 0.15s, color 0.15s;}
+    .project-item:hover {transform:scale(1.04); background:var(--main-btn-hover); color: var(--wine-red);}
     #certifications .cert-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .cert-list {display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; margin-top:1.2rem;}
     .cert-badge {background:var(--accent); color:var(--wine-red); font-weight:700; border-radius:6px; padding:0.8rem 1.6rem;}
@@ -115,7 +117,8 @@
     .blog-item {background:var(--accent); border-radius:8px; padding:1rem 1.4rem;}
     #resources .res-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .res-list {display:flex; gap:1.2rem; flex-wrap:wrap;}
-    .res-item {background:var(--wine-red); color:var(--white); border-radius:8px; padding:1.1rem 2rem; text-decoration:none;}
+    .res-item {background:var(--wine-red); color:var(--white); border-radius:8px; padding:1.1rem 2rem; text-decoration:none; transition:background 0.15s, color 0.15s, transform 0.15s;}
+    .res-item:hover {background:var(--main-btn-hover); color:var(--wine-red); transform: scale(1.04);}
     #languages .lang-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
     .lang-list {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
     .lang-item {background:var(--wine-red); color:var(--white); border-radius:6px; padding:0.8rem 1.4rem;}
@@ -124,21 +127,63 @@
     .contact-info {display:flex; flex-direction:column; gap:0.9rem; font-size:1.1rem; color:var(--wine-red);}
     .contact-form {display:flex; flex-direction:column; gap:0.8rem;}
     .contact-form input, .contact-form textarea {padding:0.75rem; border:1px solid #ccc; border-radius:4px;}
-    .contact-form button {background:var(--wine-red); color:var(--white); padding:0.9rem; border:none; border-radius:4px; font-weight:600;}
-    footer {text-align:center; padding:2rem 0; color:var(--wine-red);}
-    .social-footer a {margin:0 0.5rem; color:var(--wine-red); text-decoration:none; font-size:1.2rem;}
+    .contact-form button {background:var(--wine-red); color:var(--white); padding:0.9rem; border:none; border-radius:4px; font-weight:600; transition: background 0.15s, color 0.15s;}
+    .contact-form button:hover {background: var(--main-btn-hover); color: var(--wine-red);}
+    .success-message {
+      display:none;
+      color: var(--wine-red);
+      font-weight:600;
+      font-size:1.12rem;
+      background:var(--accent);
+      border-radius:6px;
+      padding:1rem 1.4rem;
+      margin-top:1rem;
+      text-align:center;
+    }
+    /* Sticky floating contact button on mobile */
+    .float-contact-btn {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      z-index: 1200;
+      background: var(--wine-red);
+      color: var(--white);
+      border-radius: 100px;
+      padding: 1rem 1.8rem;
+      font-weight: 700;
+      box-shadow: 0 4px 16px var(--card-shadow);
+      font-size: 1.13rem;
+      border: none;
+      cursor: pointer;
+      transition: background 0.18s, color 0.18s, transform 0.15s;
+      display: none;
+    }
+    .float-contact-btn:hover {
+      background: var(--main-btn-hover);
+      color: var(--wine-red);
+      transform: scale(1.04);
+    }
     @media (max-width:900px) {
       .stats {flex-direction:column;}
       #about .container {max-width:100%;}
       #outsourcing-kosovo .container {max-width:100%;}
       .contact-content {grid-template-columns:1fr;}
+      .float-contact-btn { display: block; }
+      nav[aria-label] a { margin-left: 0.5rem; font-size: 0.97rem; }
+      header { padding: 1rem 0.7rem; }
+    }
+    @media (max-width:600px) {
+      .site-logo { height:44px; }
+      h1 { font-size: 2rem !important; }
+      section { padding: 2.3rem 0.2rem; }
+      .stats { gap: 1rem; }
     }
   </style>
 </head>
 <body>
   <header>
     <a id="home-logo"><img src="/hepa-website/hepa-logo.png" alt="Hepa logo" class="site-logo"></a>
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
@@ -367,25 +412,40 @@
             <div>✉️ info@hepa.com</div>
             <div>📞 +383 44 123 456</div>
           </div>
-          <form class="contact-form">
-            <input type="text" name="name" placeholder="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" required>
-            <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
-            <label><input type="checkbox" required> I am not a robot</label>
+          <form class="contact-form" aria-label="Contact form" id="mainContactForm" autocomplete="on">
+            <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" required>
+            <textarea name="message" rows="4" placeholder="Your Message" aria-label="Your Message" required></textarea>
+            <label><input type="checkbox" required aria-label="Not a robot"> I am not a robot</label>
             <button type="submit">Send Message</button>
+            <div class="success-message" id="formSuccessMsg">✅ Thank you! Your message has been sent.</div>
           </form>
         </div>
       </div>
     </section>
   </main>
+  <button class="float-contact-btn" onclick="window.location='#contact';" aria-label="Jump to contact form">Contact</button>
   <footer>
     <div>© 2025 Hepa Solutions | Built with pride in Kosovo</div>
     <div class="social-footer">
-      <a href="#">LinkedIn</a>
-      <a href="#">GitHub</a>
-      <a href="#">Twitter</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+      <a href="#" aria-label="GitHub">GitHub</a>
+      <a href="#" aria-label="Twitter">Twitter</a>
     </div>
     <div style="margin-top:0.7rem; font-size:0.98rem;">Looking to join our team? <b>We’re open for project partnerships and freelance experts. <a href="#contact" style="color:var(--wine-red);">Contact us</a></b></div>
   </footer>
+  <script>
+    // Success message after form submit (for demo, blocks submission)
+    document.getElementById('mainContactForm').onsubmit = function(e) {
+      e.preventDefault();
+      document.getElementById('formSuccessMsg').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('formSuccessMsg').style.display = 'none';
+        document.getElementById('mainContactForm').reset();
+      }, 3500);
+      // Remove 'return false;' if you wire up to a real backend later!
+      return false;
+    };
+  </script>
 </body>
 </html>
