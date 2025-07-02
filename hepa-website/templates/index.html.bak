@@ -508,6 +508,41 @@
     <a href="#contact" style="color:var(--wine-red); text-decoration:underline; font-weight:600;">Contact us</a>
   </div>
 </footer>
-  <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
+  <script>
+document.getElementById('mainContactForm').onsubmit = function(e) {
+  e.preventDefault();
+
+  const name = document.querySelector('[name="name"]').value;
+  const email = document.querySelector('[name="email"]').value;
+  const message = document.querySelector('[name="message"]').value;
+
+  fetch('/submit_contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const msg = document.getElementById('formSuccessMsg');
+      msg.textContent = data.message;
+      msg.style.display = 'block';
+
+      setTimeout(() => {
+        msg.style.display = 'none';
+        document.getElementById('mainContactForm').reset();
+      }, 3500);
+    } else {
+      alert('Something went wrong. Try again later.');
+    }
+  })
+  .catch(err => {
+    alert('Error submitting form!');
+    console.error(err);
+  });
+};
+</script>
 </body>
 </html>
