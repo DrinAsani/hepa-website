@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ item.title }} – Projects | Hepa Solutions</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+  <main style="max-width:700px;margin:4rem auto;padding:2rem;background:#fff;border-radius:12px;">
+    <h1 style="color:#722F37;">{{ item.title }}</h1>
+    <p style="color:#4b2c30;line-height:1.6;">{{ item.description }}</p>
+    {% if item.features %}
+      <h2 style="margin-top:2rem;">Highlights</h2>
+      <ul>
+        {% for f in item.features %}<li>{{ f }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+    <p style="margin-top:2rem;"><a href="/" style="color:#722F37;">← Back home</a></p>
+  </main>
+</body>
+</html>
