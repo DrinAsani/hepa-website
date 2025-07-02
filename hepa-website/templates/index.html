@@ -272,24 +272,25 @@
         </p>
       </div>
     </section>
-
-    <section id="services">
-      <div class="container services-card">
-        <h2>Our Services</h2>
-        <div class="service-list">
-          <div class="service-item">Network Engineering</div>
-          <div class="service-item">DevOps & Platform Engineering</div>
-          <div class="service-item">Cloud Solutions (AWS, Azure)</div>
-          <div class="service-item">Cyber Security & Compliance</div>
-          <div class="service-item">IT Support & Managed Services</div>
-          <div class="service-item">Automation (CI/CD, Infra, Workflows)</div>
-          <div class="service-item">Data Analytics & IoT</div>
-          <div class="service-item">Web & Mobile Development</div>
-          <div class="service-item">Digital Transformation Consulting</div>
-          <div class="service-item">Training & Workshops</div>
-        </div>
-      </div>
-    </section>
+    <!-- START OF SERVICES SECTION -->
+<section id="services">
+  <div class="container services-card">
+    <h2>Our Services</h2>
+    <div class="service-list">
+      <a href="/services/network-engineering" class="service-item">Network Engineering</a>
+      <a href="/services/devops"             class="service-item">DevOps & Platform Engineering</a>
+      <a href="/services/cloud"              class="service-item">Cloud Solutions (AWS, Azure)</a>
+      <a href="/services/cybersecurity"      class="service-item">Cyber Security & Compliance</a>
+      <a href="/services/it-support"         class="service-item">IT Support & Managed Services</a>
+      <a href="/services/automation"         class="service-item">Automation (CI/CD, Infra, Workflows)</a>
+      <a href="/services/data-iot"           class="service-item">Data Analytics & IoT</a>
+      <a href="/services/web-mobile"         class="service-item">Web & Mobile Development</a>
+      <a href="/services/consulting"         class="service-item">Digital Transformation Consulting</a>
+      <a href="/services/training"           class="service-item">Training & Workshops</a>
+    </div>
+  </div>
+</section>
+<!-- END OF SERVICES SECTION -->
     <section id="case-study">
       <div class="container case-wrap">
         <h2 class="case-title">Case Study: Data Center & Network Automation</h2>
@@ -495,17 +496,40 @@
   </div>
 </footer>
   <script>
-    // Success message after form submit (for demo, blocks submission)
-    document.getElementById('mainContactForm').onsubmit = function(e) {
-      e.preventDefault();
-      document.getElementById('formSuccessMsg').style.display = 'block';
+document.getElementById('mainContactForm').onsubmit = function(e) {
+  e.preventDefault();
+
+  const name = document.querySelector('[name="name"]').value;
+  const email = document.querySelector('[name="email"]').value;
+  const message = document.querySelector('[name="message"]').value;
+
+  fetch('/submit_contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, message })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      const msg = document.getElementById('formSuccessMsg');
+      msg.textContent = data.message;
+      msg.style.display = 'block';
+
       setTimeout(() => {
-        document.getElementById('formSuccessMsg').style.display = 'none';
+        msg.style.display = 'none';
         document.getElementById('mainContactForm').reset();
       }, 3500);
-      // Remove 'return false;' if you wire up to a real backend later!
-      return false;
-    };
-  </script>
+    } else {
+      alert('Something went wrong. Try again later.');
+    }
+  })
+  .catch(err => {
+    alert('Error submitting form!');
+    console.error(err);
+  });
+};
+</script>
 </body>
 </html>
