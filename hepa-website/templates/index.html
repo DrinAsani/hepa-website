@@ -201,7 +201,15 @@
 </head>
 <body>
   <header>
-    <a id="home-logo"><img src="/hepa-website/hepa-logo.png" alt="Hepa logo" class="site-logo"></a>
+  <a id="home-logo">
+    <img 
+      src="{{ url_for('static', filename='images/hepa-logo.png') }}" 
+      alt="Hepa logo" 
+      class="site-logo"
+    >
+  </a>
+  …
+</header>
     <nav aria-label="Main navigation">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
