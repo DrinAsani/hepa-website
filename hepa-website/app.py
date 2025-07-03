@@ -1,159 +1,140 @@
 import os
-from dotenv import load_dotenv
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
 from flask_cors import CORS
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+from smtplib import SMTP_SSL
+from email.message import EmailMessage
+from dotenv import load_dotenv
 
-# ─── Load ENV ──────────────────────────────────────────────────────────────────
+# ─── Load environment ─────────────────────────────────────────────────────────
 load_dotenv()  # expects a .env in your project root
-
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 EMAIL_TO   = os.getenv("EMAIL_TO")
-
-if not all([EMAIL_USER, EMAIL_PASS, EMAIL_TO]):
+if not EMAIL_USER or not EMAIL_PASS or not EMAIL_TO:
     raise RuntimeError("Missing EMAIL_USER, EMAIL_PASS, or EMAIL_TO in .env")
 
-# ─── App Setup ─────────────────────────────────────────────────────────────────
-app = Flask(__name__, static_folder="static", template_folder="templates")
+# ─── Email helper ─────────────────────────────────────────────────────────────
+def _send_email(sender, password, recipient, subject, body):
+    msg = EmailMessage()
+    msg["From"] = sender
+    msg["To"]   = recipient
+    msg["Subject"] = subject
+    msg.set_content(body)
+    with SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(sender, password)
+        smtp.send_message(msg)
+
+# ─── Flask app setup ─────────────────────────────────────────────────────────
+app = Flask(__name__)
 CORS(app)
 
-# ─── Data Tables ────────────────────────────────────────────────────────────────
-services = {
-    "network-engineering": {
-        "slug": "network-engineering",
-        "title": "Network Engineering",
-        "description": "We design, build and maintain scalable, secure enterprise networks using the latest routing, switching and SD-WAN technologies."
-    },
-    "devops-platform-engineering": {
-        "slug": "devops-platform-engineering",
-        "title": "DevOps & Platform Engineering",
-        "description": "From CI/CD pipelines to Kubernetes clusters, we automate your entire software delivery lifecycle for speed and reliability."
-    },
-    "cloud-solutions": {
-        "slug": "cloud-solutions",
-        "title": "Cloud Solutions (AWS, Azure)",
-        "description": "Architecture, migration and managed services for public and hybrid clouds—optimizing cost, performance and compliance."
-    },
-    # … add the rest …
-}
+# ─── Your content definitions ─────────────────────────────────────────────────
+SERVICES = [
+    {"slug": "network-engineering",       "title": "Network Engineering", "description": "…your copy here…"},
+    {"slug": "devops",                     "title": "DevOps & Platform Engineering", "description": "…"},
+    {"slug": "cloud",                      "title": "Cloud Solutions (AWS, Azure)",    "description": "…"},
+    {"slug": "cybersecurity",              "title": "Cyber Security & Compliance",      "description": "…"},
+    {"slug": "it-support",                 "title": "IT Support & Managed Services",    "description": "…"},
+    {"slug": "automation",                 "title": "Automation (CI/CD, Infra, Workflows)", "description": "…"},
+    {"slug": "data-iot",                   "title": "Data Analytics & IoT",             "description": "…"},
+    {"slug": "web-mobile",                 "title": "Web & Mobile Development",         "description": "…"},
+    {"slug": "consulting",                 "title": "Digital Transformation Consulting", "description": "…"},
+    {"slug": "training",                   "title": "Training & Workshops",             "description": "…"},
+]
 
-industries = {
-    "finance": {
-        "slug": "finance",
-        "title": "Finance",
-        "description": "Secure, compliant IT and network solutions for banks, payments, and fintech startups."
-    },
-    "healthcare": {
-        "slug": "healthcare",
-        "title": "Healthcare",
-        "description": "EHR integrations, secure telemedicine networks, and HIPAA-compliant infrastructure."
-    },
-    # … add the rest …
-}
+INDUSTRIES = [
+    {"slug": "finance",       "title": "Finance",       "description": "…"},
+    {"slug": "healthcare",    "title": "Healthcare",    "description": "…"},
+    {"slug": "retail",        "title": "Retail & E-commerce", "description": "…"},
+    {"slug": "manufacturing", "title": "Manufacturing", "description": "…"},
+    {"slug": "startups",      "title": "Startups",      "description": "…"},
+    {"slug": "government",    "title": "Government",    "description": "…"},
+    {"slug": "telecom",       "title": "Telecom",       "description": "…"},
+    {"slug": "smart-buildings","title": "Smart Buildings","description": "…"},
+    {"slug": "education",     "title": "Education",     "description": "…"},
+]
 
-projects = {
-    "dc-automation-platform": {
-        "slug": "dc-automation-platform",
-        "title": "DC Automation Platform",
-        "description": "Automated provisioning and configuration of multi-site data center fabrics using GitLab CI and Arista EOS templates."
-    },
-    "hybrid-cloud-migration": {
-        "slug": "hybrid-cloud-migration",
-        "title": "Hybrid Cloud Migration",
-        "description": "Seamless migration of workloads from legacy on-prem to AWS and Azure with minimal downtime."
-    },
-    # … add the rest …
-}
+PROJECTS = [
+    {"slug": "dc-automation-platform","title": "DC Automation Platform","description": "…"},
+    {"slug": "hybrid-cloud-migration","title": "Hybrid Cloud Migration","description": "…"},
+    {"slug": "network-overhaul-smb",  "title": "Network Overhaul for SMB","description": "…"},
+    {"slug": "secure-iot-rollout",    "title": "Secure IoT Rollout",    "description": "…"},
+    {"slug": "custom-web-dashboard",  "title": "Custom Web Dashboard",  "description": "…"},
+]
 
-tech = {
-    "cisco": {
-        "slug": "cisco",
-        "title": "Cisco",
-        "description": "Expertise in Cisco routers, switches, and data center fabrics (ACI, NX-OS)."
-    },
-    "aws": {
-        "slug": "aws",
-        "title": "AWS",
-        "description": "Design and management of EC2, EKS, VPC, IAM, and serverless architectures."
-    },
-    "kubernetes": {
-        "slug": "kubernetes",
-        "title": "Kubernetes",
-        "description": "Production-grade Kubernetes clusters, Helm charts, and GitOps workflows."
-    },
-    # … add the rest …
-}
+TECHS = [
+    {"slug": "cisco",       "title": "Cisco",       "description": "…"},
+    {"slug": "aws",         "title": "AWS",         "description": "…"},
+    {"slug": "azure",       "title": "Azure",       "description": "…"},
+    {"slug": "kubernetes",  "title": "Kubernetes",  "description": "…"},
+    {"slug": "linux",       "title": "Linux",       "description": "…"},
+    {"slug": "python",      "title": "Python",      "description": "…"},
+    {"slug": "ansible",     "title": "Ansible",     "description": "…"},
+]
 
-# ─── Email Helper ────────────────────────────────────────────────────────────────
-def _send_email(sender, password, recipient, subject, body):
-    msg = MIMEMultipart()
-    msg["From"] = sender
-    msg["To"] = recipient
-    msg["Subject"] = subject
-    msg.attach(MIMEText(body, "plain"))
-
-    with smtplib.SMTP("smtp.gmail.com", 587) as server:
-        server.ehlo()
-        server.starttls()
-        server.login(sender, password)
-        server.send_message(msg)
-
-# ─── Routes ─────────────────────────────────────────────────────────────────────
+# ─── Routes ───────────────────────────────────────────────────────────────────
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        services=SERVICES,
+        industries=INDUSTRIES,
+        projects=PROJECTS,
+        techs=TECHS
+    )
 
 @app.route("/services/<slug>")
 def service_detail(slug):
-    svc = services.get(slug)
+    svc = next((x for x in SERVICES if x["slug"] == slug), None)
     if not svc:
-        return "Not found", 404
+        abort(404)
     return render_template("service_detail.html", service=svc)
 
 @app.route("/industries/<slug>")
 def industry_detail(slug):
-    ind = industries.get(slug)
+    ind = next((x for x in INDUSTRIES if x["slug"] == slug), None)
     if not ind:
-        return "Not found", 404
+        abort(404)
     return render_template("industry_detail.html", industry=ind)
 
 @app.route("/projects/<slug>")
 def project_detail(slug):
-    prj = projects.get(slug)
-    if not prj:
-        return "Not found", 404
-    return render_template("project_detail.html", project=prj)
+    pj = next((x for x in PROJECTS if x["slug"] == slug), None)
+    if not pj:
+        abort(404)
+    return render_template("project_detail.html", project=pj)
 
 @app.route("/tech/<slug>")
 def tech_detail(slug):
-    t = tech.get(slug)
-    if not t:
-        return "Not found", 404
-    return render_template("tech_detail.html", tech=t)
+    tech = next((x for x in TECHS if x["slug"] == slug), None)
+    if not tech:
+        abort(404)
+    return render_template("tech_detail.html", tech=tech)
 
 @app.route("/submit_contact", methods=["POST"])
 def submit_contact():
     data = request.json or {}
-    name    = data.get("name", "")
-    email   = data.get("email", "")
-    message = data.get("message", "")
+    name    = data.get("name")
+    email   = data.get("email")
+    message = data.get("message")
+    if not (name and email and message):
+        return jsonify(success=False, message="Missing fields"), 400
 
+    # send email
     try:
         _send_email(
-            sender   = EMAIL_USER,
-            password = EMAIL_PASS,
-            recipient= EMAIL_TO,
-            subject  = f"New Contact: {name}",
-            body     = f"Name: {name}\nEmail: {email}\n\n{message}"
+            sender    = EMAIL_USER,
+            password  = EMAIL_PASS,
+            recipient = EMAIL_TO,
+            subject   = f"New message from {name}",
+            body      = f"Name: {name}\nEmail: {email}\n\n{message}"
         )
-        return jsonify(success=True, message="Thank you! Your message has been sent.")
     except Exception as e:
         app.logger.error("Email error: %s", e)
         return jsonify(success=False, message="Failed to send email."), 500
 
-# ─── Run ────────────────────────────────────────────────────────────────────────
+    return jsonify(success=True, message="Thank you! Your message has been received.")
+
+# ─── Boot ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=True)
