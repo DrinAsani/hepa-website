@@ -1,123 +1,191 @@
 import os
+import ssl
 import smtplib
-from flask import Flask, render_template, request, jsonify, abort, url_for
+from flask import Flask, render_template, request, jsonify, abort
 from flask_cors import CORS
 from dotenv import load_dotenv
 
-# ──────────────────────────── load env ────────────────────────────
-load_dotenv()
+# ─────────────────────────────────────────────────────────────────────────────
+# 1) Load environment
+# ─────────────────────────────────────────────────────────────────────────────
+load_dotenv()  # reads .env in project root
+
 EMAIL_USER = os.getenv("EMAIL_USER")
 EMAIL_PASS = os.getenv("EMAIL_PASS")
 EMAIL_TO   = os.getenv("EMAIL_TO")
-if not all((EMAIL_USER, EMAIL_PASS, EMAIL_TO)):
-    raise RuntimeError("Missing EMAIL_USER / EMAIL_PASS / EMAIL_TO in .env")
 
-# ──────────────────────────── flask setup ────────────────────────────
-app = Flask(__name__)
-CORS(app)
+if not (EMAIL_USER and EMAIL_PASS and EMAIL_TO):
+    raise RuntimeError("Missing EMAIL_USER, EMAIL_PASS, or EMAIL_TO in .env")
 
-# ──────────────────────────── your data ────────────────────────────
-# Slugs must match the detail‐page URLs below.
+# ─────────────────────────────────────────────────────────────────────────────
+# 2) Your “database” of content
+#    (you can edit titles, slugs, descriptions, features, etc. as you like)
+# ─────────────────────────────────────────────────────────────────────────────
 SERVICES = [
-    {"slug":"network-engineering",
-     "title":"Network Engineering",
-     "description":"Scalable, secure networks built to last.",
-     "features":["LAN/WAN design","BGP & OSPF peering","High-availability"]},
-    {"slug":"devops",
-     "title":"DevOps & Platform Engineering",
-     "description":"CI/CD, automation & cloud-native workflows.",
-     "features":["GitLab pipelines","Terraform modules","Docker orchestration"]},
-    {"slug":"cloud",
-     "title":"Cloud Solutions (AWS, Azure)",
-     "description":"End-to-end cloud migrations & architectures.",
-     "features":["VPC design","IAM best practices","Cost optimization"]},
-    {"slug":"cybersecurity",
-     "title":"Cyber Security & Compliance",
-     "description":"Pen-testing, audits & security hardening.",
-     "features":["Vulnerability scans","SIEM integration","ISO27001"]},
-    {"slug":"it-support",
-     "title":"IT Support & Managed Services",
-     "description":"24/7 helpdesk, monitoring & on-site support.",
-     "features":["Ticketing system","SLA management","Remote troubleshooting"]},
-    {"slug":"automation",
-     "title":"Automation (CI/CD, Infra, Workflows)",
-     "description":"Automate deployments & infrastructure tasks.",
-     "features":["Ansible playbooks","GitOps workflows","Webhook triggers"]},
-    {"slug":"data-iot",
-     "title":"Data Analytics & IoT",
-     "description":"Transform sensor data into business insights.",
-     "features":["Kafka pipelines","Dashboards (Plotly)","Edge compute"]},
-    {"slug":"web-mobile",
-     "title":"Web & Mobile Development",
-     "description":"Responsive front-ends & robust back-ends.",
-     "features":["React/Angular","RESTful APIs","Push notifications"]},
-    {"slug":"consulting",
-     "title":"Digital Transformation Consulting",
-     "description":"Strategy, roadmaps & change management.",
-     "features":["Maturity assessments","KPI definition","Workshops"]},
-    {"slug":"training",
-     "title":"Training & Workshops",
-     "description":"Hands-on courses in networking, DevOps & cloud.",
-     "features":["Certification prep","Lab environments","Custom curricula"]},
+    {"slug": "network-engineering", "title": "Network Engineering", "content": "We design and optimize your enterprise networks…"},
+    {"slug": "devops",               "title": "DevOps & Platform Engineering", "content": "CI/CD pipelines, infrastructure as code, and more."},
+    {"slug": "cloud",                "title": "Cloud Solutions (AWS, Azure)", "content": "Public, private, and hybrid cloud migrations & ops."},
+    {"slug": "cybersecurity",        "title": "Cyber Security & Compliance", "content": "Vulnerability assessments, audits, policy."},
+    {"slug": "it-support",           "title": "IT Support & Managed Services", "content": "24/7 helpdesk, system monitoring, SLAs."},
+    {"slug": "automation",           "title": "Automation (CI/CD, Infra, Workflows)", "content": "End-to-end automation of your processes."},
+    {"slug": "data-iot",             "title": "Data Analytics & IoT", "content": "Collect, analyze, visualize real-time data."},
+    {"slug": "web-mobile",           "title": "Web & Mobile Development", "content": "Custom web apps, mobile apps, responsive UI."},
+    {"slug": "consulting",           "title": "Digital Transformation Consulting", "content": "Strategy, roadmaps, change management."},
+    {"slug": "training",             "title": "Training & Workshops", "content": "Hands-on courses in DevOps, cloud, security."},
 ]
 
 INDUSTRIES = [
-    {"slug":"finance",     "title":"Finance","description":"Secure trading platforms, risk analytics."},
-    {"slug":"healthcare",  "title":"Healthcare","description":"HIPAA-compliant EHR & telemedicine."},
-    {"slug":"retail-ecom", "title":"Retail & E-commerce","description":"Scalable storefronts & payment integration."},
-    {"slug":"manufacturing","title":"Manufacturing","description":"Smart factory & IIoT solutions."},
-    {"slug":"startups",    "title":"Startups","description":"MVPs, rapid prototyping & scale-up."},
-    {"slug":"government",  "title":"Government","description":"Citizen portals & secure infrastructure."},
-    {"slug":"telecom",     "title":"Telecom","description":"5G backhaul & network orchestration."},
-    {"slug":"smart-buildings","title":"Smart Buildings","description":"IoT sensors & energy management."},
-    {"slug":"education",   "title":"Education","description":"E-learning platforms & virtual labs."},
-    {"slug":"digitalization","title":"Digitalization","description":"End-to-end digital transformation."},
+    {
+      "slug": "finance",
+      "title": "Finance",
+      "description": "Solutions tailored to banks, fintechs, and payment processors.",
+      "features": ["High-availability networks", "PCI-DSS compliance", "Real-time analytics"]
+    },
+    {
+      "slug": "healthcare",
+      "title": "Healthcare",
+      "description": "HIPAA-ready, secure patient data management & telehealth.",
+      "features": ["Encrypted data flows", "24/7 monitoring", "Disaster recovery"]
+    },
+    {
+      "slug": "retail-ecommerce",
+      "title": "Retail & E-commerce",
+      "description": "Scaleable platforms for omni-channel shopping experiences.",
+      "features": ["High-traffic architectures", "Inventory & IoT integrations"]
+    },
+    {
+      "slug": "manufacturing",
+      "title": "Manufacturing",
+      "description": "Smart factory automation and Industrial IoT integration.",
+      "features": ["Edge computing", "Predictive maintenance"]
+    },
+    {
+      "slug": "startups",
+      "title": "Startups",
+      "description": "MVP builds, cloud cost optimization, and agile ops.",
+      "features": ["Rapid prototyping", "DevOps bootcamps"]
+    },
+    {
+      "slug": "government",
+      "title": "Government",
+      "description": "Secure, compliant infrastructure for public sector.",
+      "features": ["Strict security controls", "Audit trails"]
+    },
+    {
+      "slug": "telecom",
+      "title": "Telecom",
+      "description": "Carrier-grade networking, OSS/BSS automations.",
+      "features": ["High throughput", "24/7 SLAs"]
+    },
+    {
+      "slug": "smart-buildings",
+      "title": "Smart Buildings",
+      "description": "IoT, BMS integrations, energy-saving automations.",
+      "features": ["Sensor networks", "Dashboard analytics"]
+    },
+    {
+      "slug": "education",
+      "title": "Education",
+      "description": "E-learning platforms, campus networking, remote labs.",
+      "features": ["Secure access", "Scalable video streaming"]
+    },
+    {
+      "slug": "digitalization",
+      "title": "Any business ready to digitalize!",
+      "description": "We can help nearly any industry go digital, fast, securely.",
+      "features": []
+    },
 ]
 
 PROJECTS = [
-    {"slug":"dc-automation-platform", "title":"DC Automation Platform"},
-    {"slug":"hybrid-cloud-migration", "title":"Hybrid Cloud Migration"},
-    {"slug":"network-overhaul-smb",   "title":"Network Overhaul for SMB"},
-    {"slug":"secure-iot-rollout",     "title":"Secure IoT Rollout"},
-    {"slug":"custom-web-dashboard",   "title":"Custom Web Dashboard"},
+    {"slug": "dc-automation-platform",    "title": "DC Automation Platform",    "content": "Automated provisioning across VLANs & data centers."},
+    {"slug": "hybrid-cloud-migration",    "title": "Hybrid Cloud Migration",    "content": "On-prem → cloud, zero-downtime or burst-to-cloud."},
+    {"slug": "network-overhaul-for-smb",  "title": "Network Overhaul for SMB",  "content": "Affordable, secure network redesign."},
+    {"slug": "secure-iot-rollout",        "title": "Secure IoT Rollout",        "content": "End-to-end IoT security for smart devices."},
+    {"slug": "custom-web-dashboard",      "title": "Custom Web Dashboard",      "content": "Real-time metrics & alerts in a single pane."},
 ]
 
-TECH_STACK = [
-    {"slug":"cisco",      "title":"Cisco","logo":"cisco.svg"},
-    {"slug":"aws",        "title":"AWS","logo":"aws_logo_smile_1200x630.png"},
-    {"slug":"azure",      "title":"Azure","logo":"azure-original.svg"},
-    {"slug":"kubernetes", "title":"Kubernetes","logo":"kubernetes-plain.svg"},
-    {"slug":"linux",      "title":"Linux","logo":"linux-original.svg"},
-    {"slug":"python",     "title":"Python","logo":"python-original.svg"},
-    {"slug":"ansible",    "title":"Ansible","logo":"ansible-original.svg"},
+TECH_LIST = [
+    {"slug": "cisco",       "title": "Cisco",       "logo": "cisco.png"},
+    {"slug": "aws",         "title": "AWS",         "logo": "aws.svg"},
+    {"slug": "azure",       "title": "Azure",       "logo": "azure-original.svg"},
+    {"slug": "kubernetes",  "title": "Kubernetes",  "logo": "kubernetes-plain.svg"},
+    {"slug": "linux",       "title": "Linux",       "logo": "linux-original.svg"},
+    {"slug": "python",      "title": "Python",      "logo": "python-original.svg"},
+    {"slug": "ansible",     "title": "Ansible",     "logo": "ansible-original.svg"},
 ]
 
-# ──────────────────────────── email helper ────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# 3) Email helper
+# ─────────────────────────────────────────────────────────────────────────────
 def _send_email(sender, password, recipient, subject, body):
-    with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
-        smtp.starttls()
-        smtp.login(sender, password)
-        # minimal RFC-822 header
-        msg = f"Subject: {subject}\n\n{body}"
-        smtp.sendmail(sender, recipient, msg)
+    msg = f"Subject: {subject}\n\n{body}"
+    ctx = ssl.create_default_context()
+    with smtplib.SMTP("smtp.gmail.com", 587) as s:
+        s.starttls(context=ctx)
+        s.login(sender, password)
+        s.sendmail(sender, recipient, msg)
 
-# ──────────────────────────── routes ────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
+# 4) Flask app and routes
+# ─────────────────────────────────────────────────────────────────────────────
+app = Flask(__name__)
+CORS(app)
+
+
 @app.route("/")
 def index():
     return render_template(
         "index.html",
-        services  = SERVICES,
-        industries= INDUSTRIES,
-        projects  = PROJECTS,
-        techs     = TECH_STACK,
+        services=SERVICES,
+        industries=INDUSTRIES,
+        projects=PROJECTS,
+        techs=TECH_LIST
     )
+
+
+@app.route("/services/<slug>")
+def service_detail(slug):
+    item = next((s for s in SERVICES if s["slug"] == slug), None)
+    if not item:
+        abort(404)
+    return render_template("service_detail.html", service=item)
+
+
+@app.route("/industries/<slug>")
+def industry_detail(slug):
+    item = next((i for i in INDUSTRIES if i["slug"] == slug), None)
+    if not item:
+        abort(404)
+    return render_template("industry_detail.html", industry=item)
+
+
+@app.route("/projects/<slug>")
+def project_detail(slug):
+    item = next((p for p in PROJECTS if p["slug"] == slug), None)
+    if not item:
+        abort(404)
+    return render_template("project_detail.html", project=item)
+
+
+@app.route("/tech/<slug>")
+def tech_detail(slug):
+    item = next((t for t in TECH_LIST if t["slug"] == slug), None)
+    if not item:
+        abort(404)
+    return render_template("tech_detail.html", tech=item)
+
 
 @app.route("/submit_contact", methods=["POST"])
 def submit_contact():
     data = request.get_json() or {}
-    name    = data.get("name","")
-    email   = data.get("email","")
-    message = data.get("message","")
+    name    = data.get("name", "").strip()
+    email   = data.get("email", "").strip()
+    message = data.get("message", "").strip()
+
+    if not (name and email and message):
+        return jsonify(success=False, message="All fields are required."), 400
+
     try:
         _send_email(
             sender    = EMAIL_USER,
@@ -126,39 +194,11 @@ def submit_contact():
             subject   = f"New message from {name}",
             body      = f"Name: {name}\nEmail: {email}\n\n{message}"
         )
-        return jsonify({"success":True,"message":"Email sent."}), 200
+        return jsonify(success=True, message="Message sent successfully.")
     except Exception as e:
-        print("Email error:", e)
-        return jsonify({"success":False,"message":"Failed to send email."}), 500
+        app.logger.error(f"Email error: {e!r}")
+        return jsonify(success=False, message="Failed to send email."), 500
 
-# Detail‐page helpers
-def _find(lst, slug):
-    return next((i for i in lst if i["slug"]==slug), None)
 
-@app.route("/services/<slug>")
-def service_detail(slug):
-    svc = _find(SERVICES, slug)
-    if not svc: abort(404)
-    return render_template("service_detail.html", service=svc)
-
-@app.route("/industries/<slug>")
-def industry_detail(slug):
-    ind = _find(INDUSTRIES, slug)
-    if not ind: abort(404)
-    return render_template("industry_detail.html", industry=ind)
-
-@app.route("/projects/<slug>")
-def project_detail(slug):
-    prj = _find(PROJECTS, slug)
-    if not prj: abort(404)
-    return render_template("project_detail.html", project=prj)
-
-@app.route("/tech/<slug>")
-def tech_detail(slug):
-    tech = _find(TECH_STACK, slug)
-    if not tech: abort(404)
-    return render_template("tech_detail.html", tech=tech)
-
-# ──────────────────────────── launch ────────────────────────────
 if __name__ == "__main__":
     app.run(debug=True)
