@@ -3,215 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hepa Solutions – IT, Network & Automation</title>
-  <meta name="description" content="Kosovo's leading IT outsourcing, network engineering, cloud, and automation partner.">
-  <meta name="keywords" content="Kosovo IT, outsourcing, DevOps, cybersecurity, network engineering, cloud, Hepa Solutions">
+  <title>Hepa Solutions – Smart, Secure IT</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-  <style>
-    :root {
-      --wine-red: #722F37;
-      --white: #FFFFFF;
-      --black: #000000;
-      --light-gray: #f5f5f5;
-      --card-shadow: rgba(0,0,0,0.1);
-      --accent: #e0e6f7;
-      --main-btn-hover: #d7bac3;
-    }
-    * { margin:0; padding:0; box-sizing:border-box; }
-    html { height:100%; overflow-x:hidden; scroll-behavior:smooth; }
-    body { font-family:'Poppins', sans-serif; color:var(--black); background:var(--light-gray);}
-    header { position:fixed; top:0; left:0; right:0; background:var(--white); padding:1rem 2rem; display:flex; align-items:center; justify-content:space-between; box-shadow:0 2px 4px var(--card-shadow); z-index:999; }
-    .site-logo { height:60px; cursor:pointer; }
-    nav[aria-label] a { margin-left:1rem; color:var(--wine-red); text-decoration:none; font-weight:500; cursor:pointer; outline:none; }
-    nav[aria-label] a:focus { outline:2px solid var(--wine-red); }
-    main { margin-top:80px; }
-    section { padding:4rem 2rem; position:relative; }
-    h1,h2,h3 { font-weight:700; }
-    h2 { color:var(--wine-red);}
-    footer {
-  text-align:center;
-  padding:2rem 0 1.5rem 0;
-  color:var(--wine-red);
-  background: transparent;
-}
-.social-footer a {
-  margin:0 0.7rem;
-  color:var(--wine-red);
-  text-decoration:none;
-  font-size:1.12rem;
-  font-weight:600;
-  transition: color 0.15s;
-}
-.social-footer a:hover {
-  color:#4b2c30;
-  text-decoration:underline;
-}
-
-    .arrow { display:none; }
-    .container { max-width:1100px; margin:auto; }
-    #hero {
-      background: linear-gradient(270deg, var(--wine-red), #a14d54, var(--wine-red));
-      background-size: 600% 600%;
-      animation: heroGradient 20s ease infinite;
-      text-align:center;
-      color:var(--white);
-      padding: 6rem 2rem 4rem 2rem;
-      position:relative;
-    }
-    @keyframes heroGradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    .hero-lead { font-size:1.4rem; margin-top:1rem; margin-bottom:2rem; }
-    .stats { display:flex; gap:2rem; justify-content:center; margin:2rem 0;}
-    .stat-block { background:rgba(255,255,255,0.08); border-radius:8px; padding:1.5rem 2rem; color:#fff; font-size:1.2rem;}
-    .cta-btn { background:var(--white); color:var(--wine-red); border:none; border-radius:4px; font-weight:600; padding:0.9rem 2rem; font-size:1.1rem; margin-top:1rem; cursor:pointer; box-shadow:0 4px 12px var(--card-shadow); transition: all 0.15s;}
-    .cta-btn:hover { background:var(--main-btn-hover); color: var(--wine-red); transform: scale(1.04);}
-    #about .container {
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: 0 4px 16px var(--card-shadow);
-      padding: 2.5rem;
-      text-align: center;
-      max-width: 700px;
-    }
-    #about img {
-      width:100px;
-      margin-bottom:1.5rem;
-      border-radius:16px;
-      box-shadow:0 2px 6px var(--card-shadow);
-    }
-    #outsourcing-kosovo .container {
-      background: var(--white);
-      border-radius: 16px;
-      box-shadow: 0 4px 16px var(--card-shadow);
-      padding: 2.5rem;
-      text-align: center;
-      max-width: 800px;
-    }
-    #outsourcing-kosovo img {
-      width: 90px;
-      max-width: 100%;
-      margin-bottom: 1.1rem;
-      filter: grayscale(0.3) drop-shadow(0 2px 10px rgba(0,0,0,0.10));
-      border-radius: 8px;
-    }
-    #outsourcing-kosovo p {
-      font-size:1.11rem;
-      color:#4b2c30;
-      line-height:1.7;
-      text-align:left;
-      margin: 0 auto;
-      max-width: 650px;
-    }
-    #outsourcing-kosovo a { color:var(--wine-red); }
-    #services .services-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .service-list {display:flex; flex-wrap:wrap; gap:1.5rem; justify-content:center; margin-top:2rem;}
-    .service-item {background:var(--wine-red); color:var(--white); padding:1.5rem 2.2rem; border-radius:8px; font-size:1.2rem; font-weight:600; transition:transform .2s, background 0.15s, color 0.15s;}
-    .service-item:hover {transform:scale(1.04); background:var(--main-btn-hover); color: var(--wine-red);}
-    #case-study {background:var(--accent);}
-    .case-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .case-title {color:var(--wine-red);}
-    .case-detail {margin-top:1rem; font-size:1.08rem;}
-    #tech-stack .tech-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .tech-logos {display:flex; gap:2rem; flex-wrap:wrap; justify-content:center; align-items:center;}
-    .tech-logo {height:40px; filter: grayscale(0.2);}
-    #industries .industries-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .industry-list {display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;}
-    .industry-item {background:var(--wine-red); color:var(--white); padding:1rem 1.7rem; border-radius:6px; font-weight:500;}
-    #portfolio .portfolio-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .projects {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
-    .project-item {background:var(--wine-red); color:var(--white); padding:1rem 1.5rem; border-radius:8px; cursor:pointer; font-weight:500; transition:transform .2s, background 0.15s, color 0.15s;}
-    .project-item:hover {transform:scale(1.04); background:var(--main-btn-hover); color: var(--wine-red);}
-    #certifications .cert-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .cert-list {display:flex; gap:1.2rem; flex-wrap:wrap; justify-content:center; margin-top:1.2rem;}
-    .cert-badge {background:var(--accent); color:var(--wine-red); font-weight:700; border-radius:6px; padding:0.8rem 1.6rem;}
-    #testimonials .testi-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .testi-list {display:flex; gap:1.5rem; flex-wrap:wrap; justify-content:center;}
-    .testi-item {background:var(--light-gray); border-radius:8px; padding:1.2rem 2rem; font-style:italic; min-width:220px;}
-    #blog .blog-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .blog-list {display:flex; gap:1.2rem; flex-wrap:wrap;}
-    .blog-item {background:var(--accent); border-radius:8px; padding:1rem 1.4rem;}
-    #resources .res-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .res-list {display:flex; gap:1.2rem; flex-wrap:wrap;}
-    .res-item {background:var(--wine-red); color:var(--white); border-radius:8px; padding:1.1rem 2rem; text-decoration:none; transition:background 0.15s, color 0.15s, transform 0.15s;}
-    .res-item:hover {background:var(--main-btn-hover); color:var(--wine-red); transform: scale(1.04);}
-    #languages .lang-wrap {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .lang-list {display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;}
-    .lang-item {background:var(--wine-red); color:var(--white); border-radius:6px; padding:0.8rem 1.4rem;}
-    #contact .contact-card {background:var(--white); border-radius:12px; box-shadow:0 4px 12px var(--card-shadow); padding:2.5rem;}
-    .contact-content {display:grid; grid-template-columns:1.1fr 1.2fr; gap:2rem; align-items:start;}
-    .contact-info {display:flex; flex-direction:column; gap:0.9rem; font-size:1.1rem; color:var(--wine-red);}
-    .contact-form {display:flex; flex-direction:column; gap:0.8rem;}
-    .contact-form input, .contact-form textarea {padding:0.75rem; border:1px solid #ccc; border-radius:4px;}
-    .contact-form button {background:var(--wine-red); color:var(--white); padding:0.9rem; border:none; border-radius:4px; font-weight:600; transition: background 0.15s, color 0.15s;}
-    .contact-form button:hover {background: var(--main-btn-hover); color: var(--wine-red);}
-    .success-message {
-      display:none;
-      color: var(--wine-red);
-      font-weight:600;
-      font-size:1.12rem;
-      background:var(--accent);
-      border-radius:6px;
-      padding:1rem 1.4rem;
-      margin-top:1rem;
-      text-align:center;
-    }
-    /* Sticky floating contact button on mobile */
-    .float-contact-btn {
-      position: fixed;
-      bottom: 26px;
-      right: 26px;
-      z-index: 1200;
-      background: var(--wine-red);
-      color: var(--white);
-      border-radius: 100px;
-      padding: 1rem 1.8rem;
-      font-weight: 700;
-      box-shadow: 0 4px 16px var(--card-shadow);
-      font-size: 1.13rem;
-      border: none;
-      cursor: pointer;
-      transition: background 0.18s, color 0.18s, transform 0.15s;
-      display: none;
-    }
-    .float-contact-btn:hover {
-      background: var(--main-btn-hover);
-      color: var(--wine-red);
-      transform: scale(1.04);
-    }
-    @media (max-width:900px) {
-      .stats {flex-direction:column;}
-      #about .container {max-width:100%;}
-      #outsourcing-kosovo .container {max-width:100%;}
-      .contact-content {grid-template-columns:1fr;}
-      .float-contact-btn { display: block; }
-      nav[aria-label] a { margin-left: 0.5rem; font-size: 0.97rem; }
-      header { padding: 1rem 0.7rem; }
-    }
-    @media (max-width:600px) {
-      .site-logo { height:44px; }
-      h1 { font-size: 2rem !important; }
-      section { padding: 2.3rem 0.2rem; }
-      .stats { gap: 1rem; }
-    }
-  </style>
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
 </head>
 <body>
   <header>
-    <header>
-  <a id="home-logo">
-    <img 
-      src="{{ url_for('static', filename='images/hepa-logo.png') }}" 
-      alt="Hepa logo" 
-      class="site-logo"
-    >
-  </a>
-  …
-</header>
+    <a href="#hero"><img src="{{ url_for('static', filename='images/hepa-logo.png') }}" alt="Hepa logo" class="site-logo"></a>
     <nav aria-label="Main navigation">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
@@ -225,135 +24,129 @@
       <a href="#contact">Contact</a>
     </nav>
   </header>
+
   <main>
+    <!-- HERO -->
     <section id="hero">
       <div class="container">
-        <h1 style="font-size:3.2rem;">Hepa Solutions</h1>
-        <div class="hero-lead">
+        <h1>Hepa Solutions</h1>
+        <p class="hero-lead">
           Your trusted partner in network engineering, automation, DevOps, platform engineering, and cybersecurity.<br>
           Smart, secure, and scalable IT for tomorrow’s business.
-        </div>
+        </p>
         <div class="stats">
-          <div class="stat-block">
-            <strong>10+ Years</strong><br>Expertise
-          </div>
-          <div class="stat-block">
-            <strong>50+ Projects</strong><br>Delivered
-          </div>
-          <div class="stat-block">
-            <strong>6 Languages</strong><br>International Service
-          </div>
-          <div class="stat-block">
-            <strong>100% SLA</strong><br>Client Satisfaction
-          </div>
+          <div class="stat-block"><strong>10+ Years</strong><br>Expertise</div>
+          <div class="stat-block"><strong>50+ Projects</strong><br>Delivered</div>
+          <div class="stat-block"><strong>6 Languages</strong><br>International Service</div>
+          <div class="stat-block"><strong>100% SLA</strong><br>Client Satisfaction</div>
         </div>
         <a href="#contact" class="cta-btn">Let’s Work Together</a>
       </div>
     </section>
+
+    <!-- ABOUT -->
     <section id="about">
-      <div class="container">
-        <img src="hepa_about.png" alt="Team illustration">
-        <h2 style="color:var(--wine-red); margin-bottom:1rem;">About Hepa</h2>
-        <p style="font-size:1.18rem; color: #722F37; margin-bottom:1.2rem;">
+      <div class="container about-card">
+        <img src="{{ url_for('static', filename='images/hepa_about.png') }}" alt="Team illustration">
+        <h2>About Hepa</h2>
+        <p>
           <b>Hepa</b> delivers modern, energy-efficient, and secure IT solutions with expertise in network engineering, automation, DevOps, cloud, and cybersecurity.
         </p>
-        <div style="font-size:1.05rem; color: #4b2c30; margin-bottom:1.5rem;">
-          🚀 Automation & Orchestration &nbsp; | &nbsp;
-          🌐 Scalable Networks &nbsp; | &nbsp;
-          ☁️ Cloud & DevOps &nbsp; | &nbsp;
-          🔒 Cybersecurity
-        </div>
-        <p style="color:#722F37; font-size:1.01rem; margin-top:1.2rem;">
+        <p class="about-icons">
+          🚀 Automation & Orchestration  |  🌐 Scalable Networks  |  ☁️ Cloud & DevOps  |  🔒 Cybersecurity
+        </p>
+        <p>
           We help businesses save energy, boost efficiency, and modernize IT infrastructure for a smarter, digital future.
         </p>
       </div>
     </section>
 
-    <!-- Kosovo Outsourcing Section -->
+    <!-- OUTSOURCING -->
     <section id="outsourcing-kosovo">
-      <div class="container">
-        <img 
-          src="https://upload.wikimedia.org/wikipedia/commons/7/76/Kosovo_in_Europe_%28zoomed%29.svg" 
-          alt="Map of Kosovo"
-        >
-        <h2 style="color:var(--wine-red); margin-bottom:1rem;">Your Trusted Outsourcing Destination—Kosovo</h2>
+      <div class="container outsourcing-card">
+        <img src="{{ url_for('static', filename='images/Kosovo_map.svg') }}" alt="Map of Kosovo">
+        <h2>Your Trusted Outsourcing Destination—Kosovo</h2>
         <p>
-          Kosovo has rapidly emerged as a premier destination for tech outsourcing, offering clients around the world not just cost-effective solutions but also consistently high-quality, on-time delivery. The ICT sector—designated a national priority—has grown exponentially: software development employment jumped from 823 in 2019 to 2,345 in 2023 (a ~185% increase), while call-center turnover surged 69% in just two years, reaching €98 million in 2023 <a href="https://outsourcing-destinations.org" target="_blank">outsourcing-destinations.org</a>, <a href="https://opendatakosovo.org" target="_blank">opendatakosovo.org</a>. With a 96.4% internet penetration rate and annual graduation of over 2,600 IT and engineering students <a href="https://kutia.net" target="_blank">kutia.net</a>, Kosovo offers a young, agile, English-fluent talent pool eager to deliver. Supported by government-backed digital infrastructure initiatives and competitive labor costs, Kosovo firms have maintained a ~30% annual export and employment growth since 2020 <a href="https://linkedin.com" target="_blank">linkedin.com</a>, <a href="https://kutia.net" target="_blank">kutia.net</a>, <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>. In the context of a global IT outsourcing market forecasted to exceed US $591 billion in 2025 <a href="https://mindinventory.com" target="_blank">mindinventory.com</a>, <a href="https://dreamix.eu" target="_blank">dreamix.eu</a>, <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>, Kosovo stands out—especially for European nearshore engagement—by combining Western-quality standards, timezone alignment, and approximately 60% of companies preferring nearshore models for collaboration ease <a href="https://sigmatechnology.com" target="_blank">sigmatechnology.com</a>, <a href="https://linkedin.com" target="_blank">linkedin.com</a>, <a href="https://cbi.eu" target="_blank">cbi.eu</a>. Whether you're a client based in Kosovo, elsewhere in Europe, or halfway around the globe, choosing us means tapping into a maturing tech ecosystem that delivers reliable, scalable, and high-touch outsourced solutions—on time, on budget, and beyond expectations.
+          Kosovo has rapidly emerged as a premier destination for tech outsourcing, offering clients around the world cost-effective, on-time delivery with Western‐quality standards. 
+          ICT employment grew ~185% from 2019 to 2023, internet penetration is 96.4%, and over 2,600 IT graduates enter the workforce annually.
+          Supported by government digital initiatives and competitive labor costs, Kosovo firms have maintained ~30% annual export growth since 2020. 
+          In a global market forecast to exceed US $591 billion by 2025, Kosovo stands out for nearshore ease and high‐touch service.
         </p>
       </div>
     </section>
-    <!-- START OF SERVICES SECTION -->
-<!-- START OF SERVICES SECTION -->
-<section id="services">
-  <div class="container services-card">
-    <h2>Our Services</h2>
-    <div class="service-list">
-      {% for svc in services %}
-      <a href="{{ url_for('service_detail', slug=svc.slug) }}"
-         class="service-item">
-        {{ svc.title }}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-<!-- END OF SERVICES SECTION -->
-    <section id="case-study">
-      <div class="container case-wrap">
-        <h2 class="case-title">Case Study: Data Center & Network Automation</h2>
-        <div class="case-detail">
-          <b>Challenge:</b> Automate provisioning for large-scale data center infrastructure across multi-subnet and multi-VLAN environments.<br><br>
-          <b>Our Solution:</b> Leveraged Tinkerbell, PXE boot, and custom BYO DHCP to automate infrastructure bring-up. Designed scalable Kubernetes clusters (EKS & bare-metal) with advanced Cilium BGP and high-availability using Keepalived VIPs and both Active-Active and Active-Standby network models. Developed Day 0/1 Arista EOS templates (VRF, static routing, IP planning). Integrated DHCP relay, netplan, and FRR for robust underlay BGP peering. Automated all network and platform workflows via GitLab CI/CD pipelines, including deployment and IPAM documentation with Git-driven diagrams.<br><br>
-          <b>Result:</b> Reduced manual deployment time by 70%, enabled rapid scale-up, and ensured compliance with security and documentation standards.
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="container services-card">
+        <h2>Our Services</h2>
+        <div class="service-list">
+          {% for svc in services %}
+            <a href="{{ url_for('service_detail', slug=svc.slug) }}" class="service-item">
+              {{ svc.title }}
+            </a>
+          {% endfor %}
         </div>
       </div>
     </section>
-<!-- INDUSTRIES -->
-<section id="industries">
-  <div class="container industries-wrap">
-    <h2>Industries We Serve</h2>
-    <div class="industry-list">
-      {% for ind in industries %}
-      <a href="{{ url_for('industry_detail', slug=ind.slug) }}"
-         class="industry-item">
-        {{ ind.title }}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-<!-- PROJECTS -->
-<section id="portfolio">
-  <div class="container portfolio-card">
-    <h2>Recent Projects</h2>
-    <div class="projects">
-      {% for proj in projects %}
-      <a href="{{ url_for('project_detail', slug=proj.slug) }}"
-         class="project-item">
-        {{ proj.title }}
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-<!-- TECH STACK -->
-<section id="tech-stack">
-  <div class="container tech-wrap">
-    <h2>Our Core Technology Stack</h2>
-    <div class="tech-logos">
-      {% for tech in tech_stack %}
-      <a href="{{ url_for('tech_detail', slug=tech.slug) }}">
-        <img src="{{ tech.img_url }}"
-             class="tech-logo"
-             alt="{{ tech.title }}"
-             title="{{ tech.title }}">
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+
+    <!-- CASE STUDY -->
+    <section id="case-study">
+      <div class="container case-card">
+        <h2>Case Study: Data Center & Network Automation</h2>
+        <p>
+          <strong>Challenge:</strong> Automate provisioning for large-scale data center infrastructure across multi-subnet and multi-VLAN environments.<br>
+          <strong>Solution:</strong> Tinkerbell + PXE + custom DHCP to provision bare-metal, scalable Kubernetes clusters (EKS & bare‐metal) with Cilium BGP, Keepalived VIPs, Arista EOS Day 0/1 templates and GitLab CI/CD pipelines.<br>
+          <strong>Result:</strong> 70% reduction in manual deployment time, rapid scale-up, and full security/documentation compliance.
+        </p>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="tech-stack">
+      <div class="container tech-card">
+        <h2>Our Core Technology Stack</h2>
+        <div class="tech-logos">
+          {% for tech in techs %}
+            <a href="{{ url_for('tech_detail', slug=tech.slug) }}" title="{{ tech.title }}">
+              <img src="{{ url_for('static', filename='images/' ~ tech.logo) }}"
+                   alt="{{ tech.title }}" class="tech-logo">
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section id="industries">
+      <div class="container industries-card">
+        <h2>Industries We Serve</h2>
+        <div class="industry-list">
+          {% for ind in industries %}
+            <a href="{{ url_for('industry_detail', slug=ind.slug) }}" class="industry-item">
+              {{ ind.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="container portfolio-card">
+        <h2>Recent Projects</h2>
+        <div class="projects">
+          {% for prj in projects %}
+            <a href="{{ url_for('project_detail', slug=prj.slug) }}" class="project-item">
+              {{ prj.title }}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- CERTIFICATIONS -->
     <section id="certifications">
-      <div class="container cert-wrap">
+      <div class="container cert-card">
         <h2>Certifications & Awards</h2>
         <div class="cert-list">
           <div class="cert-badge">Cisco CCNA</div>
@@ -368,140 +161,117 @@
           <div class="cert-badge">Ansible</div>
           <div class="cert-badge">Java</div>
         </div>
-        <p style="text-align:center; margin-top:1.5rem; color:#964553;">
-          <em>We believe in continuous learning and industry best practices.</em>
-        </p>
       </div>
     </section>
+
+    <!-- TESTIMONIALS -->
     <section id="testimonials">
-      <div class="container testi-wrap">
+      <div class="container testi-card">
         <h2>What Our Clients Say</h2>
-        <div class="testi-list">
-          <div class="testi-item">
-            “Hepa Solutions delivered a seamless network migration for our HQ. Professional, proactive, and always a step ahead!”
-            <br>– CEO, FinTech Client
-          </div>
-          <div class="testi-item">
-            “Their automation frameworks saved us hundreds of hours and eliminated manual errors.”
-            <br>– IT Manager, Manufacturing
-          </div>
-        </div>
+        <blockquote class="testi-item">
+          “Hepa Solutions delivered a seamless network migration for our HQ. Professional, proactive, and always a step ahead!”<br>
+          – CEO, FinTech Client
+        </blockquote>
+        <blockquote class="testi-item">
+          “Their automation frameworks saved us hundreds of hours and eliminated manual errors.”<br>
+          – IT Manager, Manufacturing
+        </blockquote>
       </div>
     </section>
+
+    <!-- BLOG -->
     <section id="blog">
-      <div class="container blog-wrap">
+      <div class="container blog-card">
         <h2>From the Knowledge Base</h2>
         <div class="blog-list">
-          <div class="blog-item"><b>5 Security Mistakes SMBs Make (And How to Fix Them)</b></div>
-          <div class="blog-item"><b>Beginner's Guide to CI/CD Automation</b></div>
-          <div class="blog-item"><b>Optimizing Hybrid Cloud with Kubernetes</b></div>
-          <div class="blog-item"><b>Why Network Segmentation Matters in 2025</b></div>
+          <div class="blog-item">5 Security Mistakes SMBs Make (And How to Fix Them)</div>
+          <div class="blog-item">Beginner's Guide to CI/CD Automation</div>
+          <div class="blog-item">Optimizing Hybrid Cloud with Kubernetes</div>
+          <div class="blog-item">Why Network Segmentation Matters in 2025</div>
         </div>
       </div>
     </section>
+
+    <!-- RESOURCES -->
     <section id="resources">
-      <div class="container res-wrap">
+      <div class="container resources-card">
         <h2>Free Resources</h2>
         <div class="res-list">
-          <a class="res-item" href="#" download>Network Security Checklist (PDF)</a>
-          <a class="res-item" href="#" download>Cloud Migration Planning Guide</a>
-          <a class="res-item" href="#" download>Kubernetes Day 0/1 Template Sample</a>
-        </div>
-        <div style="margin-top:1.2rem; font-size:1.03rem; color:var(--wine-red);">
-          Want more? <a href="#contact" style="color:var(--wine-red); text-decoration:underline;">Contact us for a tailored assessment</a>
+          <a class="res-item" href="{{ url_for('static', filename='docs/Network_Security_Checklist.pdf') }}">Network Security Checklist (PDF)</a>
+          <a class="res-item" href="{{ url_for('static', filename='docs/Cloud_Migration_Guide.pdf') }}">Cloud Migration Planning Guide</a>
+          <a class="res-item" href="{{ url_for('static', filename='docs/K8s_Day0-1_Template.pdf') }}">Kubernetes Day 0/1 Template Sample</a>
         </div>
       </div>
     </section>
+
+    <!-- LANGUAGES -->
     <section id="languages">
-      <div class="container lang-wrap">
+      <div class="container lang-card">
         <h2>Languages We Speak</h2>
         <div class="lang-list">
-          <div class="lang-item">English</div>
-          <div class="lang-item">Albanian</div>
-          <div class="lang-item">German</div>
-          <div class="lang-item">Italian</div>
-          <div class="lang-item">Spanish</div>
-          <div class="lang-item">Polish</div>
-          <div class="lang-item">Croatian</div>
+          <span class="lang-item">English</span>
+          <span class="lang-item">Albanian</span>
+          <span class="lang-item">German</span>
+          <span class="lang-item">Italian</span>
+          <span class="lang-item">Spanish</span>
+          <span class="lang-item">Polish</span>
+          <span class="lang-item">Croatian</span>
         </div>
-        <p style="margin-top:1.2rem; color:#964553;">We offer service and contracts in all supported languages!</p>
       </div>
     </section>
+
+    <!-- TEAM -->
     <section id="team">
-  <div class="container" style="background: var(--white); border-radius:16px; box-shadow:0 4px 16px var(--card-shadow); padding:2.5rem; text-align:center; max-width:900px;">
-    <h2 style="color:var(--wine-red); margin-bottom:2rem;">Meet Our Leadership</h2>
-    <div style="display:flex; gap:2.5rem; justify-content:center; flex-wrap:wrap;">
-      <!-- Network Engineer -->
-      <div style="background:var(--accent); border-radius:12px; padding:1.5rem 1.2rem; min-width:220px; max-width:240px; box-shadow:0 2px 8px var(--card-shadow);">
-        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Network Engineer" style="width:74px; border-radius:50%; margin-bottom:1rem; box-shadow:0 2px 8px #ccc;">
-        <h3 style="color:var(--wine-red); font-size:1.1rem; margin-bottom:0.3rem;">Ardian Krasniqi</h3>
-        <div style="color:#222; font-size:0.99rem; font-weight:600;">Lead Network Engineer</div>
-        <div style="font-size:0.96rem; color:#4b2c30; margin:0.5rem 0 0.8rem 0;">
-          Expert in scalable infrastructure, BGP, and secure enterprise networks.
+      <div class="container team-card">
+        <h2>Meet Our Leadership</h2>
+        <div class="team-list">
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/45.jpg') }}" alt="Ardian Krasniqi">
+            <h3>Ardian Krasniqi</h3><p>Lead Network Engineer</p>
+          </div>
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/78.jpg') }}" alt="Blerim Dervishi">
+            <h3>Blerim Dervishi</h3><p>DevOps & Automation Engineer</p>
+          </div>
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/63.jpg') }}" alt="Elira Gashi">
+            <h3>Elira Gashi</h3><p>Business Manager</p>
+          </div>
         </div>
-        <a href="https://www.linkedin.com/in/ardian-krasniqi" target="_blank" style="color:var(--wine-red); text-decoration:underline; font-size:0.98rem;">LinkedIn</a>
       </div>
-      <!-- DevOps & Automation Engineer -->
-      <div style="background:var(--accent); border-radius:12px; padding:1.5rem 1.2rem; min-width:220px; max-width:240px; box-shadow:0 2px 8px var(--card-shadow);">
-        <img src="https://randomuser.me/api/portraits/men/78.jpg" alt="DevOps Engineer" style="width:74px; border-radius:50%; margin-bottom:1rem; box-shadow:0 2px 8px #ccc;">
-        <h3 style="color:var(--wine-red); font-size:1.1rem; margin-bottom:0.3rem;">Blerim Dervishi</h3>
-        <div style="color:#222; font-size:0.99rem; font-weight:600;">DevOps & Automation Engineer</div>
-        <div style="font-size:0.96rem; color:#4b2c30; margin:0.5rem 0 0.8rem 0;">
-          CI/CD, cloud-native, and workflow automation for scale and security.
-        </div>
-        <a href="https://www.linkedin.com/in/blerim-dervishi" target="_blank" style="color:var(--wine-red); text-decoration:underline; font-size:0.98rem;">LinkedIn</a>
-      </div>
-      <!-- Business Manager -->
-      <div style="background:var(--accent); border-radius:12px; padding:1.5rem 1.2rem; min-width:220px; max-width:240px; box-shadow:0 2px 8px var(--card-shadow);">
-        <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Business Manager" style="width:74px; border-radius:50%; margin-bottom:1rem; box-shadow:0 2px 8px #ccc;">
-        <h3 style="color:var(--wine-red); font-size:1.1rem; margin-bottom:0.3rem;">Elira Gashi</h3>
-        <div style="color:#222; font-size:0.99rem; font-weight:600;">Business Manager</div>
-        <div style="font-size:0.96rem; color:#4b2c30; margin:0.5rem 0 0.8rem 0;">
-          Client relations, project management, and strategic growth leadership.
-        </div>
-        <a href="https://www.linkedin.com/in/elira-gashi" target="_blank" style="color:var(--wine-red); text-decoration:underline; font-size:0.98rem;">LinkedIn</a>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
+
+    <!-- CONTACT -->
     <section id="contact">
       <div class="container contact-card">
         <h2>Contact Us</h2>
-        <p style="font-size:1.15rem; color:#964553;">
-          Ready to transform your IT? Let’s talk about your project or support needs.<br>
-          <b>We are open for new clients!</b>
-        </p>
-        <div class="contact-content">
-          <div class="contact-info">
-            <div>📍 Prishtina, Kosovo</div>
-            <div>✉️ info@hepa.com</div>
-            <div>📞 +383 44 123 456</div>
-          </div>
-          <form class="contact-form" aria-label="Contact form" id="mainContactForm" autocomplete="on">
-            <input type="text" name="name" placeholder="Your Name" aria-label="Your Name" required>
-            <input type="email" name="email" placeholder="Your Email" aria-label="Your Email" required>
-            <textarea name="message" rows="4" placeholder="Your Message" aria-label="Your Message" required></textarea>
-            <label><input type="checkbox" required aria-label="Not a robot"> I am not a robot</label>
-            <button type="submit">Send Message</button>
-            <div class="success-message" id="formSuccessMsg">✅ Thank you! Your message has been sent.</div>
-          </form>
+        <p>Ready to transform your IT? Let’s talk about your project or support needs.<br><b>We are open for new clients!</b></p>
+        <div class="contact-info">
+          <div>📍 Prishtina, Kosovo</div>
+          <div>✉️ info@hepa.com</div>
+          <div>📞 +383 44 123 456</div>
         </div>
+        <form id="contactForm" aria-label="Contact form">
+          <input name="name"    type="text"    placeholder="Your Name"     required>
+          <input name="email"   type="email"   placeholder="Your Email"    required>
+          <textarea name="message" rows="4"   placeholder="Your Message"  required></textarea>
+          <label><input name="not_robot" type="checkbox" required> I am not a robot</label>
+          <button type="submit">Send Message</button>
+          <div id="formSuccessMsg" class="success-message">✅ Thank you! Your message has been sent.</div>
+        </form>
       </div>
     </section>
   </main>
-  <button class="float-contact-btn" onclick="window.location='#contact';" aria-label="Jump to contact form">Contact</button>
+
   <footer>
-  <div style="margin-bottom:0.7rem;">© 2025 Hepa Solutions | Built with pride in Kosovo</div>
-  <div class="social-footer" style="margin-bottom:0.7rem;">
-    <a href="#" aria-label="LinkedIn">LinkedIn</a>
-    <a href="#" aria-label="GitHub">GitHub</a>
-    <a href="#" aria-label="Twitter">Twitter</a>
-  </div>
-  <div style="font-size:0.98rem; color:var(--wine-red);">
-    Looking to join our team? <b>We’re open for project partnerships and freelance experts.</b>
-    <a href="#contact" style="color:var(--wine-red); text-decoration:underline; font-weight:600;">Contact us</a>
-  </div>
-</footer>
+    <div>© 2025 Hepa Solutions | Built with pride in Kosovo</div>
+    <div class="social-footer">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+    </div>
+  </footer>
+
   <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
 </body>
 </html>

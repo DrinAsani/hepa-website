@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>{{ item.title }} – Technology | Hepa Solutions</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ tech.title }} – Hepa Solutions</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <main style="max-width:600px;margin:4rem auto;padding:2rem;background:#fff;border-radius:12px;">
-    <h1 style="color:#722F37;">{{ item.title }}</h1>
-    <p style="color:#4b2c30;line-height:1.6;">{{ item.description }}</p>
-    <p style="margin-top:2rem;"><a href="/" style="color:#722F37;">← Back home</a></p>
+  <main class="detail-card">
+    <h1>{{ tech.title }}</h1>
+    <p>{{ tech.content or "Learn more about this technology." }}</p>
+    <p><a href="{{ url_for('index') }}">← Back to Homepage</a></p>
   </main>
 </body>
 </html>
