@@ -1,10 +1,16 @@
+<<<<<<< HEAD
 import os
 from flask import Flask, render_template, request, jsonify, abort
 from flask_cors import CORS
 from smtplib import SMTP_SSL
 from email.message import EmailMessage
+=======
+from flask import Flask, render_template, abort
+>>>>>>> 6fdd95a (Make homepage dynamic: loop services, industries, projects & tech)
 from dotenv import load_dotenv
+import os
 
+<<<<<<< HEAD
 # ─── Load environment ─────────────────────────────────────────────────────────
 load_dotenv()  # expects a .env in your project root
 EMAIL_USER = os.getenv("EMAIL_USER")
@@ -137,4 +143,129 @@ def submit_contact():
 
 # ─── Boot ─────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
+=======
+load_dotenv()  # … your email config, etc …
+
+app = Flask(__name__)
+
+# ─── DATA ─────────────────────────────────────────────────────────────────────
+
+SERVICES = [
+    {"slug":"network-engineering", "title":"Network Engineering", 
+     "description":"Design, deploy & manage scalable enterprise networks.",
+     "features":["BGP routing","VLAN segmentation","SD-WAN"]},
+    {"slug":"devops", "title":"DevOps & Platform Engineering", 
+     "description":"Accelerate delivery with CI/CD, IaC, and GitOps workflows.",
+     "features":["GitLab CI/CD","Terraform","Ansible"]},
+    # … 8 more …
+]
+
+INDUSTRIES = [
+    {"slug":"finance","title":"Finance",
+     "description":"Secure, compliant infrastructure for banking.",
+     "features":["PCI-DSS","HA clustering"]},
+    {"slug":"healthcare","title":"Healthcare",
+     "description":"HIPAA-compliant security for hospitals.",
+     "features":["Encrypted data","RBAC"]},
+    # … 8 more …
+]
+
+CASE_STUDIES = [
+    {"title":"Data Center & Network Automation",
+     "challenge":"Automate provisioning across multi-VLAN/subnets.",
+     "solution":"Used Tinkerbell + GitLab CI/CD + Arista EOS templates.",
+     "result":"70% faster deployments, full documentation."},
+    # you can add more case studies here …
+]
+
+TECH_STACK = [
+    {"name":"Cisco","logo":"cisco.png"},
+    {"name":"AWS","logo":"aws.svg"},
+    {"name":"Azure","logo":"azure-original.svg"},
+    {"name":"Kubernetes","logo":"kubernetes-plain.svg"},
+    {"name":"Linux","logo":"linux-original.svg"},
+    {"name":"Python","logo":"python-original.svg"},
+    {"name":"Ansible","logo":"ansible-original.svg"},
+    {"name":"AWS (again)","logo":"aws_logo_smile_1200x630.png"},
+]
+
+PROJECTS = [
+    {"slug":"dc-automation-platform","title":"DC Automation Platform"},
+    {"slug":"hybrid-cloud-migration","title":"Hybrid Cloud Migration"},
+    {"slug":"network-overhaul-smb","title":"Network Overhaul for SMB"},
+    {"slug":"secure-iot-rollout","title":"Secure IoT Rollout"},
+    {"slug":"custom-web-dashboard","title":"Custom Web Dashboard"},
+]
+
+CERTIFICATIONS = [
+    "Cisco CCNA","Cisco CCNP","CKAD","CKA",
+    "Fortinet NSE","AWS","Azure","Python","Linux","Ansible","Java"
+]
+
+TESTIMONIALS = [
+    {"quote":"Hepa delivered a seamless network migration. Always ahead!","author":"CEO, FinTech"},
+    {"quote":"Their automation saved us hundreds of hours.","author":"IT Manager, Manufacturing"},
+]
+
+BLOG_POSTS = [
+    {"slug":"security-mistakes-smbs","title":"5 Security Mistakes SMBs Make (And How to Fix Them)"},
+    {"slug":"ci-cd-automation-guide","title":"Beginner's Guide to CI/CD Automation"},
+    {"slug":"optimizing-hybrid-cloud","title":"Optimizing Hybrid Cloud with Kubernetes"},
+    {"slug":"network-segmentation-2025","title":"Why Network Segmentation Matters in 2025"},
+]
+
+RESOURCES = [
+    {"filename":"network-checklist.pdf","title":"Network Security Checklist (PDF)"},
+    {"filename":"cloud-migration-guide.pdf","title":"Cloud Migration Planning Guide"},
+    {"filename":"k8s-day0-1-template.pdf","title":"Kubernetes Day 0/1 Template Sample"},
+]
+
+LANGUAGES = ["English","Albanian","German","Italian","Spanish","Polish","Croatian"]
+
+TEAM = [
+    {"name":"Ardian Krasniqi","role":"Lead Network Engineer",
+     "photo":"45.jpg","linkedin":"https://linkedin.com/in/ardian-krasniqi",
+     "bio":"Expert in BGP, VRF & enterprise networks."},
+    {"name":"Blerim Dervishi","role":"DevOps Engineer",
+     "photo":"78.jpg","linkedin":"https://linkedin.com/in/blerim-dervishi",
+     "bio":"CI/CD & cloud-native workflow automation."},
+    {"name":"Elira Gashi","role":"Business Manager",
+     "photo":"63.jpg","linkedin":"https://linkedin.com/in/elira-gashi",
+     "bio":"Client relations & strategic growth leadership."},
+]
+
+# ─── VIEWS ────────────────────────────────────────────────────────────────────
+
+@app.route("/")
+def index():
+    return render_template("index.html",
+        services=SERVICES,
+        industries=INDUSTRIES,
+        case_studies=CASE_STUDIES,
+        tech_stack=TECH_STACK,
+        projects=PROJECTS,
+        certifications=CERTIFICATIONS,
+        testimonials=TESTIMONIALS,
+        blog_posts=BLOG_POSTS,
+        resources=RESOURCES,
+        languages=LANGUAGES,
+        team=TEAM
+    )
+
+@app.route("/services/<slug>")
+def service_detail(slug):
+    svc = next((s for s in SERVICES if s["slug"]==slug), None)
+    if not svc: abort(404)
+    return render_template("service_detail.html", service=svc)
+
+@app.route("/industries/<slug>")
+def industry_detail(slug):
+    ind = next((i for i in INDUSTRIES if i["slug"]==slug), None)
+    if not ind: abort(404)
+    return render_template("industry_detail.html", industry=ind)
+
+# if you want detail pages for projects, blog, etc, repeat same pattern…
+
+if __name__=="__main__":
+>>>>>>> 6fdd95a (Make homepage dynamic: loop services, industries, projects & tech)
     app.run(debug=True)

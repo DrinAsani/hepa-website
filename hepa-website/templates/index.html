@@ -283,20 +283,17 @@
       </div>
     </section>
     <!-- START OF SERVICES SECTION -->
+<!-- START OF SERVICES SECTION -->
 <section id="services">
   <div class="container services-card">
     <h2>Our Services</h2>
     <div class="service-list">
-      <a href="/services/network-engineering" class="service-item">Network Engineering</a>
-      <a href="/services/devops"             class="service-item">DevOps & Platform Engineering</a>
-      <a href="/services/cloud"              class="service-item">Cloud Solutions (AWS, Azure)</a>
-      <a href="/services/cybersecurity"      class="service-item">Cyber Security & Compliance</a>
-      <a href="/services/it-support"         class="service-item">IT Support & Managed Services</a>
-      <a href="/services/automation"         class="service-item">Automation (CI/CD, Infra, Workflows)</a>
-      <a href="/services/data-iot"           class="service-item">Data Analytics & IoT</a>
-      <a href="/services/web-mobile"         class="service-item">Web & Mobile Development</a>
-      <a href="/services/consulting"         class="service-item">Digital Transformation Consulting</a>
-      <a href="/services/training"           class="service-item">Training & Workshops</a>
+      {% for svc in services %}
+      <a href="{{ url_for('service_detail', slug=svc.slug) }}"
+         class="service-item">
+        {{ svc.title }}
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -311,51 +308,47 @@
         </div>
       </div>
     </section>
-   <!-- INDUSTRIES -->
+<!-- INDUSTRIES -->
 <section id="industries">
   <div class="container industries-wrap">
     <h2>Industries We Serve</h2>
     <div class="industry-list">
-      <a href="/industries/finance"       class="industry-item">Finance</a>
-      <a href="/industries/healthcare"    class="industry-item">Healthcare</a>
-      <a href="/industries/retail-ecommerce" class="industry-item">Retail &amp; E-commerce</a>
-      <a href="/industries/manufacturing" class="industry-item">Manufacturing</a>
-      <a href="/industries/startups"      class="industry-item">Startups</a>
-      <a href="/industries/government"    class="industry-item">Government</a>
-      <a href="/industries/telecom"       class="industry-item">Telecom</a>
-      <a href="/industries/smart-buildings" class="industry-item">Smart Buildings</a>
-      <a href="/industries/education"     class="industry-item">Education</a>
-      <a href="/industries/other"         class="industry-item">Any business ready to digitalize!</a>
+      {% for ind in industries %}
+      <a href="{{ url_for('industry_detail', slug=ind.slug) }}"
+         class="industry-item">
+        {{ ind.title }}
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
-
 <!-- PROJECTS -->
 <section id="portfolio">
   <div class="container portfolio-card">
     <h2>Recent Projects</h2>
     <div class="projects">
-      <a href="/projects/dc-automation-platform"      class="project-item">DC Automation Platform</a>
-      <a href="/projects/hybrid-cloud-migration"      class="project-item">Hybrid Cloud Migration</a>
-      <a href="/projects/network-overhaul-smb"        class="project-item">Network Overhaul for SMB</a>
-      <a href="/projects/secure-iot-rollout"          class="project-item">Secure IoT Rollout</a>
-      <a href="/projects/custom-web-dashboard"        class="project-item">Custom Web Dashboard</a>
+      {% for proj in projects %}
+      <a href="{{ url_for('project_detail', slug=proj.slug) }}"
+         class="project-item">
+        {{ proj.title }}
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
-
 <!-- TECH STACK -->
 <section id="tech-stack">
   <div class="container tech-wrap">
     <h2>Our Core Technology Stack</h2>
     <div class="tech-logos">
-      <a href="/tech/cisco"><img src="https://cdn.simpleicons.org/cisco/1BA0D7" class="tech-logo" alt="Cisco" title="Cisco"></a>
-      <a href="/tech/aws"><img src="https://svgshare.com/i/12ud.svg" class="tech-logo" alt="AWS" title="AWS"></a>
-      <a href="/tech/azure"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg" class="tech-logo" alt="Azure" title="Azure"></a>
-      <a href="/tech/kubernetes"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" class="tech-logo" alt="Kubernetes" title="Kubernetes"></a>
-      <a href="/tech/linux"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" class="tech-logo" alt="Linux" title="Linux"></a>
-      <a href="/tech/python"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" class="tech-logo" alt="Python" title="Python"></a>
-      <a href="/tech/ansible"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ansible/ansible-original.svg" class="tech-logo" alt="Ansible" title="Ansible"></a>
+      {% for tech in tech_stack %}
+      <a href="{{ url_for('tech_detail', slug=tech.slug) }}">
+        <img src="{{ tech.img_url }}"
+             class="tech-logo"
+             alt="{{ tech.title }}"
+             title="{{ tech.title }}">
+      </a>
+      {% endfor %}
     </div>
   </div>
 </section>
