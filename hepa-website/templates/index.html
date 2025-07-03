@@ -2,20 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Hepa Solutions – IT, Network & Automation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hepa Solutions – Smart, Secure IT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='images/favicon.png') }}" type="image/png">
 </head>
 <body>
   <header>
-    <a href="/"><img src="{{ url_for('static','images/hepa-logo.png') }}" alt="Hepa logo" class="site-logo"></a>
+    <a href="#hero"><img src="{{ url_for('static', filename='images/hepa-logo.png') }}" alt="Hepa logo" class="site-logo"></a>
     <nav aria-label="Main navigation">
       <a href="#hero">Home</a>
       <a href="#about">About</a>
       <a href="#services">Services</a>
-      <a href="#industries">Industries</a>
-      <a href="#portfolio">Projects</a>
-      <a href="#tech-stack">Tech</a>
+      <a href="#case-study">Case Study</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#blog">Blog</a>
+      <a href="#resources">Resources</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -25,16 +30,48 @@
     <section id="hero">
       <div class="container">
         <h1>Hepa Solutions</h1>
-        <p>Your trusted partner in network engineering, automation, DevOps, cloud & security.</p>
+        <p class="hero-lead">
+          Your trusted partner in network engineering, automation, DevOps, platform engineering, and cybersecurity.<br>
+          Smart, secure, and scalable IT for tomorrow’s business.
+        </p>
+        <div class="stats">
+          <div class="stat-block"><strong>10+ Years</strong><br>Expertise</div>
+          <div class="stat-block"><strong>50+ Projects</strong><br>Delivered</div>
+          <div class="stat-block"><strong>6 Languages</strong><br>International Service</div>
+          <div class="stat-block"><strong>100% SLA</strong><br>Client Satisfaction</div>
+        </div>
         <a href="#contact" class="cta-btn">Let’s Work Together</a>
       </div>
     </section>
 
     <!-- ABOUT -->
     <section id="about">
-      <div class="container">
+      <div class="container about-card">
+        <img src="{{ url_for('static', filename='images/hepa_about.png') }}" alt="Team illustration">
         <h2>About Hepa</h2>
-        <p>Modern, energy-efficient, secure IT solutions: Networking, DevOps, Cloud, Cybersecurity, Automation.</p>
+        <p>
+          <b>Hepa</b> delivers modern, energy-efficient, and secure IT solutions with expertise in network engineering, automation, DevOps, cloud, and cybersecurity.
+        </p>
+        <p class="about-icons">
+          🚀 Automation & Orchestration  |  🌐 Scalable Networks  |  ☁️ Cloud & DevOps  |  🔒 Cybersecurity
+        </p>
+        <p>
+          We help businesses save energy, boost efficiency, and modernize IT infrastructure for a smarter, digital future.
+        </p>
+      </div>
+    </section>
+
+    <!-- OUTSOURCING -->
+    <section id="outsourcing-kosovo">
+      <div class="container outsourcing-card">
+        <img src="{{ url_for('static', filename='images/Kosovo_map.svg') }}" alt="Map of Kosovo">
+        <h2>Your Trusted Outsourcing Destination—Kosovo</h2>
+        <p>
+          Kosovo has rapidly emerged as a premier destination for tech outsourcing, offering clients around the world cost-effective, on-time delivery with Western‐quality standards. 
+          ICT employment grew ~185% from 2019 to 2023, internet penetration is 96.4%, and over 2,600 IT graduates enter the workforce annually.
+          Supported by government digital initiatives and competitive labor costs, Kosovo firms have maintained ~30% annual export growth since 2020. 
+          In a global market forecast to exceed US $591 billion by 2025, Kosovo stands out for nearshore ease and high‐touch service.
+        </p>
       </div>
     </section>
 
@@ -52,9 +89,36 @@
       </div>
     </section>
 
+    <!-- CASE STUDY -->
+    <section id="case-study">
+      <div class="container case-card">
+        <h2>Case Study: Data Center & Network Automation</h2>
+        <p>
+          <strong>Challenge:</strong> Automate provisioning for large-scale data center infrastructure across multi-subnet and multi-VLAN environments.<br>
+          <strong>Solution:</strong> Tinkerbell + PXE + custom DHCP to provision bare-metal, scalable Kubernetes clusters (EKS & bare‐metal) with Cilium BGP, Keepalived VIPs, Arista EOS Day 0/1 templates and GitLab CI/CD pipelines.<br>
+          <strong>Result:</strong> 70% reduction in manual deployment time, rapid scale-up, and full security/documentation compliance.
+        </p>
+      </div>
+    </section>
+
+    <!-- TECH STACK -->
+    <section id="tech-stack">
+      <div class="container tech-card">
+        <h2>Our Core Technology Stack</h2>
+        <div class="tech-logos">
+          {% for tech in techs %}
+            <a href="{{ url_for('tech_detail', slug=tech.slug) }}" title="{{ tech.title }}">
+              <img src="{{ url_for('static', filename='images/' ~ tech.logo) }}"
+                   alt="{{ tech.title }}" class="tech-logo">
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
     <!-- INDUSTRIES -->
     <section id="industries">
-      <div class="container industries-wrap">
+      <div class="container industries-card">
         <h2>Industries We Serve</h2>
         <div class="industry-list">
           {% for ind in industries %}
@@ -66,7 +130,7 @@
       </div>
     </section>
 
-    <!-- PROJECTS -->
+    <!-- PORTFOLIO -->
     <section id="portfolio">
       <div class="container portfolio-card">
         <h2>Recent Projects</h2>
@@ -80,19 +144,99 @@
       </div>
     </section>
 
-    <!-- TECH STACK -->
-    <section id="tech-stack">
-      <div class="container tech-wrap">
-        <h2>Our Core Technology Stack</h2>
-        <div class="tech-logos">
-          {% for tech in techs %}
-            <a href="{{ url_for('tech_detail', slug=tech.slug) }}">
-              <img src="{{ url_for('static','images/' ~ tech.logo) }}"
-                   alt="{{ tech.title }}"
-                   title="{{ tech.title }}"
-                   class="tech-logo">
-            </a>
-          {% endfor %}
+    <!-- CERTIFICATIONS -->
+    <section id="certifications">
+      <div class="container cert-card">
+        <h2>Certifications & Awards</h2>
+        <div class="cert-list">
+          <div class="cert-badge">Cisco CCNA</div>
+          <div class="cert-badge">Cisco CCNP</div>
+          <div class="cert-badge">CKAD</div>
+          <div class="cert-badge">CKA</div>
+          <div class="cert-badge">Fortinet NSE</div>
+          <div class="cert-badge">AWS</div>
+          <div class="cert-badge">Azure</div>
+          <div class="cert-badge">Python</div>
+          <div class="cert-badge">Linux</div>
+          <div class="cert-badge">Ansible</div>
+          <div class="cert-badge">Java</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials">
+      <div class="container testi-card">
+        <h2>What Our Clients Say</h2>
+        <blockquote class="testi-item">
+          “Hepa Solutions delivered a seamless network migration for our HQ. Professional, proactive, and always a step ahead!”<br>
+          – CEO, FinTech Client
+        </blockquote>
+        <blockquote class="testi-item">
+          “Their automation frameworks saved us hundreds of hours and eliminated manual errors.”<br>
+          – IT Manager, Manufacturing
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- BLOG -->
+    <section id="blog">
+      <div class="container blog-card">
+        <h2>From the Knowledge Base</h2>
+        <div class="blog-list">
+          <div class="blog-item">5 Security Mistakes SMBs Make (And How to Fix Them)</div>
+          <div class="blog-item">Beginner's Guide to CI/CD Automation</div>
+          <div class="blog-item">Optimizing Hybrid Cloud with Kubernetes</div>
+          <div class="blog-item">Why Network Segmentation Matters in 2025</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESOURCES -->
+    <section id="resources">
+      <div class="container resources-card">
+        <h2>Free Resources</h2>
+        <div class="res-list">
+          <a class="res-item" href="{{ url_for('static', filename='docs/Network_Security_Checklist.pdf') }}">Network Security Checklist (PDF)</a>
+          <a class="res-item" href="{{ url_for('static', filename='docs/Cloud_Migration_Guide.pdf') }}">Cloud Migration Planning Guide</a>
+          <a class="res-item" href="{{ url_for('static', filename='docs/K8s_Day0-1_Template.pdf') }}">Kubernetes Day 0/1 Template Sample</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LANGUAGES -->
+    <section id="languages">
+      <div class="container lang-card">
+        <h2>Languages We Speak</h2>
+        <div class="lang-list">
+          <span class="lang-item">English</span>
+          <span class="lang-item">Albanian</span>
+          <span class="lang-item">German</span>
+          <span class="lang-item">Italian</span>
+          <span class="lang-item">Spanish</span>
+          <span class="lang-item">Polish</span>
+          <span class="lang-item">Croatian</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM -->
+    <section id="team">
+      <div class="container team-card">
+        <h2>Meet Our Leadership</h2>
+        <div class="team-list">
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/45.jpg') }}" alt="Ardian Krasniqi">
+            <h3>Ardian Krasniqi</h3><p>Lead Network Engineer</p>
+          </div>
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/78.jpg') }}" alt="Blerim Dervishi">
+            <h3>Blerim Dervishi</h3><p>DevOps & Automation Engineer</p>
+          </div>
+          <div class="team-member">
+            <img src="{{ url_for('static', filename='images/63.jpg') }}" alt="Elira Gashi">
+            <h3>Elira Gashi</h3><p>Business Manager</p>
+          </div>
         </div>
       </div>
     </section>
@@ -101,11 +245,17 @@
     <section id="contact">
       <div class="container contact-card">
         <h2>Contact Us</h2>
-        <form id="mainContactForm">
-          <input type="text"   name="name"    placeholder="Your Name"    required>
-          <input type="email"  name="email"   placeholder="Your Email"   required>
-          <textarea name="message" rows="4"   placeholder="Your Message" required></textarea>
-          <label><input type="checkbox" required> I am not a robot</label>
+        <p>Ready to transform your IT? Let’s talk about your project or support needs.<br><b>We are open for new clients!</b></p>
+        <div class="contact-info">
+          <div>📍 Prishtina, Kosovo</div>
+          <div>✉️ info@hepa.com</div>
+          <div>📞 +383 44 123 456</div>
+        </div>
+        <form id="contactForm" aria-label="Contact form">
+          <input name="name"    type="text"    placeholder="Your Name"     required>
+          <input name="email"   type="email"   placeholder="Your Email"    required>
+          <textarea name="message" rows="4"   placeholder="Your Message"  required></textarea>
+          <label><input name="not_robot" type="checkbox" required> I am not a robot</label>
           <button type="submit">Send Message</button>
           <div id="formSuccessMsg" class="success-message">✅ Thank you! Your message has been sent.</div>
         </form>
@@ -113,6 +263,15 @@
     </section>
   </main>
 
-  <script src="{{ url_for('static','js/contact.js') }}"></script>
+  <footer>
+    <div>© 2025 Hepa Solutions | Built with pride in Kosovo</div>
+    <div class="social-footer">
+      <a href="#">LinkedIn</a>
+      <a href="#">GitHub</a>
+      <a href="#">Twitter</a>
+    </div>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/contact.js') }}"></script>
 </body>
 </html>
