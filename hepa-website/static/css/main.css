@@ -1,12 +1,12 @@
 :root {
-  --primary: #3730A3;
-  --primary-light: #EEF2FF;
+  --primary: #722F37;         /* your wine-red */
+  --primary-light: #EDE1E3;   /* very pale wine-pink for backgrounds */
+  --accent: #D7BAC3;     
   --bg: #FAFAFB;
   --text: #1A1A1A;
   --card: #FFF;
-  --accent: #6366F1;
   --radius: 18px;
-  --shadow: 0 2px 12px rgba(36,40,120,0.07);
+  --shadow: 0 2px 12px rgba(36,40,120,0.07)
 }
 
 html, body {
