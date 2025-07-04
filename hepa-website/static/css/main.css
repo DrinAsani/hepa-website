@@ -33,7 +33,7 @@ a:hover { color: var(--accent); }
   top: 0; z-index: 99;
 }
 
-.site-header .logo img { height: 48px; }
+.site-header .logo img { height: 240px; }
 
 .site-header nav {
   display: flex; gap: 1.4rem;
