@@ -7,10 +7,11 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <main class="detail-card">
+  <main class="detail-card tech-detail-card">
+    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
     <h1>{{ tech.title }}</h1>
+    <img src="{{ url_for('static', filename='images/' ~ tech.logo) }}" alt="{{ tech.title }}" class="tech-logo-large">
     <p>{{ tech.content or "Learn more about this technology." }}</p>
-    <p><a href="{{ url_for('index') }}">← Back to Homepage</a></p>
   </main>
 </body>
 </html>

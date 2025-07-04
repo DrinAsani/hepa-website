@@ -7,20 +7,18 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <main class="detail-card">
+  <main class="detail-card industry-detail-card">
+    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
     <h1>{{ industry.title }}</h1>
-    <p>{{ industry.description }}</p>
-
+    <p class="desc">{{ industry.description }}</p>
     {% if industry.features %}
-      <h2>Key Benefits</h2>
+      <h2>Industry Features</h2>
       <ul>
-        {% for f in industry.features %}
-          <li>{{ f }}</li>
+        {% for feat in industry.features %}
+          <li>{{ feat }}</li>
         {% endfor %}
       </ul>
     {% endif %}
-
-    <p><a href="{{ url_for('index') }}">← Back to Homepage</a></p>
   </main>
 </body>
 </html>

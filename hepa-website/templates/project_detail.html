@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <main class="detail-card">
+  <main class="detail-card project-detail-card">
+    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
     <h1>{{ project.title }}</h1>
-    <p>{{ project.content }}</p>
-    <p><a href="{{ url_for('index') }}">← Back to Homepage</a></p>
+    {% if project.content %}
+      <p class="desc">{{ project.content }}</p>
+    {% endif %}
   </main>
 </body>
 </html>

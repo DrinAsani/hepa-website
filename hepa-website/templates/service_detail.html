@@ -7,10 +7,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 </head>
 <body>
-  <main class="detail-card">
+  <main class="detail-card service-detail-card">
+    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
     <h1>{{ service.title }}</h1>
-    <p>{{ service.description }}</p>
-
+    {% if service.content %}
+      <p class="desc">{{ service.content }}</p>
+    {% endif %}
     {% if service.features %}
       <h2>Key Features</h2>
       <ul>
@@ -19,17 +21,6 @@
         {% endfor %}
       </ul>
     {% endif %}
-
-    {% if service.case_studies %}
-      <h2>Case Studies</h2>
-      <ul>
-        {% for cs in service.case_studies %}
-          <li><strong>{{ cs.name }}:</strong> {{ cs.result }}</li>
-        {% endfor %}
-      </ul>
-    {% endif %}
-
-    <p><a href="{{ url_for('index') }}">← Back to Homepage</a></p>
   </main>
 </body>
 </html>
