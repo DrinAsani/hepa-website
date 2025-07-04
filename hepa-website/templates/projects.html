@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Projects – Hepa Solutions{% endblock %}
+{% block content %}
+<section class="projects-list">
+  <div class="container">
+    <h1>Projects & Case Studies</h1>
+    <div class="project-grid">
+      {% for proj in projects %}
+      <a href="{{ url_for('project_detail', slug=proj.slug) }}" class="project-card">
+        <h3>{{ proj.title }}</h3>
+        <p>{{ proj.summary }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

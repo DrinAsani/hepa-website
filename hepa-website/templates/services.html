@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Services – Hepa Solutions{% endblock %}
+{% block content %}
+<section class="services-list">
+  <div class="container">
+    <h1>All Services</h1>
+    <div class="service-grid">
+      {% for svc in services %}
+      <a href="{{ url_for('service_detail', slug=svc.slug) }}" class="service-card">
+        <h3>{{ svc.title }}</h3>
+        <p>{{ svc.content }}</p>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

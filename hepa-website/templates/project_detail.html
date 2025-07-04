@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ project.title }} – Hepa Solutions</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
-  <main class="detail-card project-detail-card">
-    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
+{% extends "base.html" %}
+{% block title %}{{ project.title }} – Hepa Solutions{% endblock %}
+{% block content %}
+<section class="project-detail">
+  <div class="container detail-card">
+    <a href="{{ url_for('projects') }}" class="back-link">&larr; Back to Projects</a>
     <h1>{{ project.title }}</h1>
-    {% if project.content %}
-      <p class="desc">{{ project.content }}</p>
+    <p>{{ project.content }}</p>
+    {% if project.results %}
+    <h2>Results</h2>
+    <p>{{ project.results }}</p>
     {% endif %}
-  </main>
-</body>
-</html>
+  </div>
+</section>
+{% endblock %}

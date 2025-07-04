@@ -1,26 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ service.title }} – Hepa Solutions</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-</head>
-<body>
-  <main class="detail-card service-detail-card">
-    <a href="{{ url_for('index') }}" class="back-link">&larr; Back to Homepage</a>
+{% extends "base.html" %}
+{% block title %}{{ service.title }} – Hepa Solutions{% endblock %}
+{% block content %}
+<section class="service-detail">
+  <div class="container detail-card">
+    <a href="{{ url_for('services') }}" class="back-link">&larr; Back to Services</a>
     <h1>{{ service.title }}</h1>
-    {% if service.content %}
-      <p class="desc">{{ service.content }}</p>
-    {% endif %}
+    <p>{{ service.content }}</p>
     {% if service.features %}
-      <h2>Key Features</h2>
-      <ul>
-        {% for feat in service.features %}
-          <li>{{ feat }}</li>
-        {% endfor %}
-      </ul>
+    <h2>Key Features</h2>
+    <ul>
+      {% for feat in service.features %}
+      <li>{{ feat }}</li>
+      {% endfor %}
+    </ul>
     {% endif %}
-  </main>
-</body>
-</html>
+  </div>
+</section>
+{% endblock %}
