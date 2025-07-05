@@ -121,16 +121,17 @@ def team():
 def contact():
     return render_template("contact.html")
 
-if __name__ == "__main__":
-    app.run(debug=True)
-
 @app.route('/projects')
 def projects_view():
     return render_template('projects.html', projects=projects)
 
 @app.route('/projects/<slug>')
 def project_detail(slug):
+    # find the matching project
     project = next((p for p in projects if p['slug'] == slug), None)
-    if not project:
-        return "Project not found", 404
+    if project is None:
+        abort(404)
     return render_template('project_detail.html', project=project)
+
+if __name__ == "__main__":
+    app.run(debug=True)
