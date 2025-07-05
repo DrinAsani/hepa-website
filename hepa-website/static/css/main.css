@@ -360,3 +360,14 @@ img {
   margin-bottom: 1rem;
   font-size: 1.2rem;
 }
+
+/* Fade-out and fade-in effect */
+.page-transition {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.page-transition.fade-out {
+  opacity: 0;
+}
+
