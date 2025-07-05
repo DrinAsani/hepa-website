@@ -175,6 +175,10 @@ def team():
 def contact():
     return render_template("contact.html")
 
+@app.route('/tech-in-kosova')
+def tech_kosova():
+    return render_template('tech_kosova.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
 
