@@ -184,23 +184,26 @@ def team():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name = request.form.get('name')
-        email = request.form.get('email')
-        message_text = request.form.get('message')
+        name    = request.form.get('name')
+        email   = request.form.get('email')
+        message = request.form.get('message')
 
-        subject = "New Contact Form Submission"
-        recipient = app.config['MAIL_USERNAME']  # or set a custom email
+        subject   = "New Contact Form Submission"
+        recipient = app.config['MAIL_USERNAME']  # you can also set a separate RECEIVER
 
         msg = Message(subject, sender=email, recipients=[recipient])
-        msg.body = f"From: {name} <{email}>\n\n{message_text}"
+        msg.body = f"From: {name} <{email}>\n\n{message}"
 
         try:
             mail.send(msg)
             flash('Your message has been sent!', 'success')
         except Exception as e:
-            print(e)
+            # print the real error to console for debugging
+            print("Mail send error:", e)
             flash('Something went wrong. Please try again later.', 'danger')
+
         return redirect(url_for('contact'))
+
     return render_template('contact.html')
 
 @app.route('/tech-in-kosova')
