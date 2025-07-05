@@ -3,20 +3,23 @@ from flask import Flask, render_template, abort, request, flash, redirect, url_f
 from dotenv import load_dotenv
 from flask_mail import Mail, Message
 
+# ── Load environment variables from .env (SECRET_KEY, MAIL_*) ────────────────
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY', 'dev')  # Needed for flash messages
+app.secret_key = os.getenv('SECRET_KEY', 'dev')  # for flash()
 
-# Flask-Mail configuration
-app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.example.com')
-app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
-app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'your@email.com')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', 'yourpassword')
+# ── Flask-Mail configuration ─────────────────────────────────────────────────
+app.config['MAIL_SERVER']        = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT']          = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS']       = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
+app.config['MAIL_USERNAME']      = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD']      = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', app.config['MAIL_USERNAME'])
 
-# Demo data
+mail = Mail(app)
+
+# ── Demo data ────────────────────────────────────────────────────────────────
 SERVICES = [
     {"slug": "network-engineering", "title": "Network Engineering", "content": "We design and optimize enterprise networks for speed, security, and reliability.", "features": ["LAN/WAN Design", "BGP, OSPF, EVPN", "Wireless Solutions"]},
     {"slug": "devops", "title": "DevOps & Platform Engineering", "content": "Automate and accelerate software delivery with CI/CD and infrastructure as code.", "features": ["CI/CD Pipelines", "Terraform & Ansible", "Monitoring & Observability"]},
@@ -149,41 +152,7 @@ TEAM = [
     {"name": "Elira Gashi", "role": "Business Manager", "photo": "team3.jpg"},
 ]
 
-mail = Mail(app)
-
-print("➜ SMTP Config:",
-      app.config['MAIL_SERVER'],
-      app.config['MAIL_PORT'],
-      "TLS=", app.config['MAIL_USE_TLS'],
-      "USER=", app.config['MAIL_USERNAME'],
-      "SENDER=", app.config['MAIL_DEFAULT_SENDER'])
-
-@app.route('/contact', methods=['GET', 'POST'])
-def contact():
-    if request.method == 'POST':
-        name    = request.form.get('name')
-        email   = request.form.get('email')
-        message = request.form.get('message')
-
-        subject   = "New Contact Form Submission"
-        recipient = app.config['MAIL_USERNAME']
-
-        msg = Message(subject, sender=email, recipients=[recipient])
-        msg.body = f"From: {name} <{email}>\n\n{message}"
-
-        try:
-            mail.send(msg)
-            flash('✅ Your message has been sent!', 'success')
-        except Exception as e:
-            # show the actual exception in the UI
-            flash(f'❌ Error sending email: {e}', 'danger')
-            # also print full traceback to console
-            import traceback; traceback.print_exc()
-
-        return redirect(url_for('contact'))
-
-    return render_template('contact.html')
-
+# ── Routes ────────────────────────────────────────────────────────────────────
 @app.route("/")
 def index():
     return render_template("index.html", services=SERVICES, projects=PROJECTS, team=TEAM)
@@ -214,34 +183,34 @@ def project_detail(slug):
 def team():
     return render_template("team.html", team=TEAM)
 
-@app.route('/contact', methods=['GET', 'POST'])
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
-    if request.method == 'POST':
-        name    = request.form.get('name')
-        email   = request.form.get('email')
-        message = request.form.get('message')
+    if request.method == "POST":
+        name         = request.form.get("name")
+        email        = request.form.get("email")
+        message_body = request.form.get("message")
 
         subject   = "New Contact Form Submission"
-        recipient = app.config['MAIL_USERNAME']  # you can also set a separate RECEIVER
+        recipient = app.config["MAIL_USERNAME"]
 
         msg = Message(subject, sender=email, recipients=[recipient])
-        msg.body = f"From: {name} <{email}>\n\n{message}"
+        msg.body = f"From: {name} <{email}>\n\n{message_body}"
 
         try:
             mail.send(msg)
-            flash('Your message has been sent!', 'success')
+            flash("✅ Your message has been sent!", "success")
         except Exception as e:
-            # print the real error to console for debugging
             print("Mail send error:", e)
-            flash('Something went wrong. Please try again later.', 'danger')
+            flash(f"❌ Error sending email: {e}", "danger")
 
-        return redirect(url_for('contact'))
+        return redirect(url_for("contact"))
 
-    return render_template('contact.html')
+    return render_template("contact.html")
 
-@app.route('/tech-in-kosova')
+@app.route("/tech-in-kosova")
 def tech_kosova():
-    return render_template('tech_kosova.html')
+    return render_template("tech_kosova.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
