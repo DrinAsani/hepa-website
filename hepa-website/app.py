@@ -10,9 +10,13 @@ app = Flask(__name__)
 SERVICES = [
     {"slug": "network-engineering", "title": "Network Engineering", "content": "We design and optimize enterprise networks for speed, security, and reliability.", "features": ["LAN/WAN Design", "BGP, OSPF, EVPN", "Wireless Solutions"]},
     {"slug": "devops", "title": "DevOps & Platform Engineering", "content": "Automate and accelerate software delivery with CI/CD and infrastructure as code.", "features": ["CI/CD Pipelines", "Terraform & Ansible", "Monitoring & Observability"]},
+    {"slug": "noc", "title": "Network Operation Center", "content": "Designing and implementing a centralized platform to monitor, manage, and optimize enterprise-wide network operations.", "features": ["24/7 Proactive Monitoring & Incident Response", "Centralized Visibility & Reporting", "SLA Management & Operational Efficiency"]},
     {"slug": "cloud", "title": "Cloud Solutions", "content": "AWS, Azure, and hybrid-cloud architecture, migrations, and ops.", "features": ["Cloud Migration", "Serverless", "Security & Compliance"]},
     {"slug": "cybersecurity", "title": "Cyber Security & Compliance", "content": "Protect your business with audits, vulnerability scans, and policy design.", "features": ["Vulnerability Scanning", "Policy & Audit", "Incident Response"]},
     {"slug": "it-support", "title": "IT Support & Managed Services", "content": "24/7 helpdesk, remote monitoring, and managed IT for your business.", "features": ["Remote Helpdesk", "SLAs", "Patch Management"]},
+    {"slug": "web-design", "title": "Website Design & Development", "content": "Create fast, modern, SEO-optimized websites with clean UX/UI—built with frameworks like React, Vue, or Django.", "features": ["SEO-optimized, fast-loading pages with clean UX", "Mobile-first design and cross-browser compatibility", "Integration with CMSs (e.g., WordPress, Strapi) or headless architecture"]},
+    {"slug": "api", "title": "API Development & Integration", "content": "Develop secure RESTful and GraphQL APIs, and integrate third-party APIs (payment gateways, CRMs, cloud services, etc.) into client applications.", "features": ["Secure RESTful and GraphQL API design", "Integration with third-party services (payments, CRMs, cloud APIs)", "Versioning and documentation using tools like Swagger or Postman"]},
+    {"slug": "e-commerce", "title": "E-commerce Platforms", "content": "Set up modern e-commerce systems with payment processing, inventory management, and customer portals using tools like Stripe, Shopify APIs, or custom builds.", "features": ["Product catalog, shopping cart, and checkout flows", "Integration with Stripe, PayPal, and crypto payments", "Admin panel for order, inventory, and user management"]},
 ]
 
 PROJECTS = [
