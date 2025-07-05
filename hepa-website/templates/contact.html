@@ -10,18 +10,21 @@
       <div><strong>✉️ Email:</strong> info@hepa.com</div>
       <div><strong>📞 Phone:</strong> +383 44 123 456</div>
     </div>
-    <form class="contact-form" aria-label="Contact form" method="POST" action="#">
+    <form class="contact-form" aria-label="Contact form" method="POST" action="{{ url_for('contact') }}">
       <input name="name" type="text" placeholder="Your Name" required>
       <input name="email" type="email" placeholder="Your Email" required>
       <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
       <button type="submit">Send Message</button>
     </form>
-    <form action="{{ url_for('contact') }}" method="POST">
-      <input type="text" name="name" required>
-      <input type="email" name="email" required>
-      <textarea name="message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for category, message in messages %}
+            <li class="{{ category }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
   </div>
 </section>
 {% endblock %}

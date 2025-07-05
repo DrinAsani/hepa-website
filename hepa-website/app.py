@@ -1,12 +1,22 @@
 import os
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request, flash, redirect, url_for
 from dotenv import load_dotenv
-from flask import render_template, request, flash, redirect, url_for
-from flask_mail import Message
+from flask_mail import Mail, Message
 
 load_dotenv()
 
 app = Flask(__name__)
+app.secret_key = os.getenv('SECRET_KEY', 'dev')  # Needed for flash messages
+
+# Flask-Mail configuration
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER', 'smtp.example.com')
+app.config['MAIL_PORT'] = int(os.getenv('MAIL_PORT', 587))
+app.config['MAIL_USE_TLS'] = os.getenv('MAIL_USE_TLS', 'true').lower() == 'true'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'your@email.com')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', 'yourpassword')
+app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', app.config['MAIL_USERNAME'])
+
+mail = Mail(app)
 
 # Demo data
 SERVICES = [
@@ -141,11 +151,6 @@ TEAM = [
     {"name": "Elira Gashi", "role": "Business Manager", "photo": "team3.jpg"},
 ]
 
-msg = Message(subject, sender=sender, recipients=[recipient])
-msg.body = message
-mail.send(msg)
-
-
 @app.route("/")
 def index():
     return render_template("index.html", services=SERVICES, projects=PROJECTS, team=TEAM)
@@ -179,11 +184,22 @@ def team():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        message = request.form['message']
-        # send email logic here...
-        flash('Your message has been sent!', 'success')
+        name = request.form.get('name')
+        email = request.form.get('email')
+        message_text = request.form.get('message')
+
+        subject = "New Contact Form Submission"
+        recipient = app.config['MAIL_USERNAME']  # or set a custom email
+
+        msg = Message(subject, sender=email, recipients=[recipient])
+        msg.body = f"From: {name} <{email}>\n\n{message_text}"
+
+        try:
+            mail.send(msg)
+            flash('Your message has been sent!', 'success')
+        except Exception as e:
+            print(e)
+            flash('Something went wrong. Please try again later.', 'danger')
         return redirect(url_for('contact'))
     return render_template('contact.html')
 
@@ -193,4 +209,3 @@ def tech_kosova():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
