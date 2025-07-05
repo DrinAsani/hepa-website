@@ -113,17 +113,6 @@ def service_detail(slug):
         abort(404)
     return render_template("service_detail.html", service=svc)
 
-@app.route("/projects")
-def projects():
-    return render_template("projects.html", projects=PROJECTS)
-
-@app.route("/projects/<slug>")
-def project_detail(slug):
-    proj = next((p for p in PROJECTS if p["slug"] == slug), None)
-    if not proj:
-        abort(404)
-    return render_template("project_detail.html", project=proj)
-
 @app.route("/team")
 def team():
     return render_template("team.html", team=TEAM)
