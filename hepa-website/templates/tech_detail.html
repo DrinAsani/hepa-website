@@ -14,5 +14,6 @@
     <img src="{{ url_for('static', filename='images/' ~ tech.logo) }}" alt="{{ tech.title }}" class="tech-logo-large">
     <p class="desc">{{ tech.content or "Learn more about this technology." }}</p>
   </main>
+  <script src="{{ url_for('static', filename='js/transition.js') }}"></script>
 </body>
 </html>
