@@ -16,8 +16,6 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME', 'your@email.com')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD', 'yourpassword')
 app.config['MAIL_DEFAULT_SENDER'] = os.getenv('MAIL_DEFAULT_SENDER', app.config['MAIL_USERNAME'])
 
-mail = Mail(app)
-
 # Demo data
 SERVICES = [
     {"slug": "network-engineering", "title": "Network Engineering", "content": "We design and optimize enterprise networks for speed, security, and reliability.", "features": ["LAN/WAN Design", "BGP, OSPF, EVPN", "Wireless Solutions"]},
@@ -150,6 +148,41 @@ TEAM = [
     {"name": "Blerim Dervishi", "role": "DevOps & Automation Engineer", "photo": "team2.jpg"},
     {"name": "Elira Gashi", "role": "Business Manager", "photo": "team3.jpg"},
 ]
+
+mail = Mail(app)
+
+print("➜ SMTP Config:",
+      app.config['MAIL_SERVER'],
+      app.config['MAIL_PORT'],
+      "TLS=", app.config['MAIL_USE_TLS'],
+      "USER=", app.config['MAIL_USERNAME'],
+      "SENDER=", app.config['MAIL_DEFAULT_SENDER'])
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    if request.method == 'POST':
+        name    = request.form.get('name')
+        email   = request.form.get('email')
+        message = request.form.get('message')
+
+        subject   = "New Contact Form Submission"
+        recipient = app.config['MAIL_USERNAME']
+
+        msg = Message(subject, sender=email, recipients=[recipient])
+        msg.body = f"From: {name} <{email}>\n\n{message}"
+
+        try:
+            mail.send(msg)
+            flash('✅ Your message has been sent!', 'success')
+        except Exception as e:
+            # show the actual exception in the UI
+            flash(f'❌ Error sending email: {e}', 'danger')
+            # also print full traceback to console
+            import traceback; traceback.print_exc()
+
+        return redirect(url_for('contact'))
+
+    return render_template('contact.html')
 
 @app.route("/")
 def index():
