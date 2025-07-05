@@ -24,7 +24,9 @@
     <button class="hamburger" aria-label="Open menu" aria-expanded="false">&#9776;</button>
   </header>
   <main>
-    {% block content %}{% endblock %}
+    <div class="page-transition" id="page-transition">
+      {% block content %}{% endblock %}
+    </div>
   </main>
   <footer>
     <div>© 2025 Hepa Solutions · Kosovo</div>
@@ -34,11 +36,6 @@
     </div>
   </footer>
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-</body>
-<body>
-  <div class="page-transition" id="page-transition">
-    {% block content %}{% endblock %}
-  </div>
   <script src="{{ url_for('static', filename='js/transition.js') }}"></script>
 </body>
 </html>
