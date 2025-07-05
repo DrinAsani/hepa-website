@@ -175,7 +175,7 @@ def team():
 def contact():
     return render_template("contact.html")
 
-@app.route('/tech-in-kosova')
+@app.route('/tech-kosova')
 def tech_kosova():
     return render_template('tech_kosova.html')
 
