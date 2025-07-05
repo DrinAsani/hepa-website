@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template, abort
 from dotenv import load_dotenv
+from flask import render_template, request, flash, redirect, url_for
+from flask_mail import Message
 
 load_dotenv()
 
@@ -139,6 +141,9 @@ TEAM = [
     {"name": "Elira Gashi", "role": "Business Manager", "photo": "team3.jpg"},
 ]
 
+msg = Message(subject, sender=sender, recipients=[recipient])
+msg.body = message
+mail.send(msg)
 
 
 @app.route("/")
@@ -171,9 +176,16 @@ def project_detail(slug):
 def team():
     return render_template("team.html", team=TEAM)
 
-@app.route("/contact")
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template("contact.html")
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        message = request.form['message']
+        # send email logic here...
+        flash('Your message has been sent!', 'success')
+        return redirect(url_for('contact'))
+    return render_template('contact.html')
 
 @app.route('/tech-in-kosova')
 def tech_kosova():
